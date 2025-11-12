@@ -14,12 +14,17 @@ from cdl_python.CDL.Reals.Divide import Divide
 from cdl_python.CDL.Reals.Exp import Exp
 from cdl_python.CDL.Reals.Greater import Greater
 from cdl_python.CDL.Reals.GreaterThreshold import GreaterThreshold
+from cdl_python.CDL.Reals.Hysteresis import Hysteresis
 from cdl_python.CDL.Reals.IntegratorWithReset import IntegratorWithReset
 from cdl_python.CDL.Reals.Less import Less
 from cdl_python.CDL.Reals.LessThreshold import LessThreshold
 from cdl_python.CDL.Reals.Limiter import Limiter
+from cdl_python.CDL.Reals.Line import Line
 from cdl_python.CDL.Reals.Log import Log
 from cdl_python.CDL.Reals.Log10 import Log10
+from cdl_python.CDL.Reals.MatrixGain import MatrixGain
+from cdl_python.CDL.Reals.MatrixMax import MatrixMax
+from cdl_python.CDL.Reals.MatrixMin import MatrixMin
 from cdl_python.CDL.Reals.Max import Max
 from cdl_python.CDL.Reals.Min import Min
 from cdl_python.CDL.Reals.Modulo import Modulo
@@ -31,6 +36,7 @@ from cdl_python.CDL.Reals.MultiplyByParameter import MultiplyByParameter
 from cdl_python.CDL.Reals.PID import PID
 from cdl_python.CDL.Reals.Round import Round
 from cdl_python.CDL.Reals.Sin import Sin
+from cdl_python.CDL.Reals.Sort import Sort
 from cdl_python.CDL.Reals.Sqrt import Sqrt
 from cdl_python.CDL.Reals.Subtract import Subtract
 from cdl_python.CDL.Reals.Switch import Switch
@@ -50,12 +56,17 @@ __all__ = [
     "Exp",
     "Greater",
     "GreaterThreshold",
+    "Hysteresis",
     "IntegratorWithReset",
     "Less",
     "LessThreshold",
     "Limiter",
+    "Line",
     "Log",
     "Log10",
+    "MatrixGain",
+    "MatrixMax",
+    "MatrixMin",
     "Max",
     "Min",
     "Modulo",
@@ -67,6 +78,7 @@ __all__ = [
     "PID",
     "Round",
     "Sin",
+    "Sort",
     "Sqrt",
     "Subtract",
     "Switch",
