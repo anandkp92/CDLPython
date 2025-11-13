@@ -37,11 +37,12 @@ class CodeGenerator:
             lstrip_blocks=True,
         )
 
-    def generate(self, model: CDLModel) -> str:
+    def generate(self, model: CDLModel, custom_imports: set = None) -> str:
         """Generate complete Python code from model
 
         Args:
             model: CDLModel to generate code from
+            custom_imports: Set of custom block names to import
 
         Returns:
             Python source code as string
@@ -58,10 +59,14 @@ class CodeGenerator:
         imports = model.get_required_imports()
         compute_body = self._generate_compute_body(model)
 
+        # Add custom block imports
+        custom_imports = custom_imports or set()
+
         # Render template
         code = template.render(
             model=model,
             imports=imports,
+            custom_imports=custom_imports,
             compute_body=compute_body
         )
 

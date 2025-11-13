@@ -1,0 +1,71 @@
+{
+  "@context": {
+    "S231P": "https://data.ashrae.org/S231P#",
+    "ex": "http://example.org#"
+  },
+  "@graph": [
+    {
+      "@id": "http://example.org#FromModelica.SubController",
+      "@type": "S231P:Block",
+      "S231P:containsBlock": [
+        {
+          "@id": "http://example.org#FromModelica.SubController.gain"
+        }
+      ],
+      "S231P:documentation": "Sub controller that multiplies input by 0.5",
+      "S231P:hasInput": {
+        "@id": "http://example.org#FromModelica.SubController.u"
+      },
+      "S231P:hasOutput": {
+        "@id": "http://example.org#FromModelica.SubController.y"
+      },
+      "S231P:label": "SubController"
+    },
+    {
+      "@id": "http://example.org#FromModelica.SubController.gain",
+      "@type": "http://example.org#Buildings.Controls.OBC.CDL.Reals.MultiplyByParameter",
+      "S231P:accessSpecifier": "public",
+      "S231P:description": "Gain block",
+      "S231P:hasInstance": [
+        {
+          "@id": "http://example.org#FromModelica.SubController.gain.k"
+        },
+        {
+          "@id": "http://example.org#FromModelica.SubController.gain.u"
+        },
+        {
+          "@id": "http://example.org#FromModelica.SubController.gain.y"
+        }
+      ],
+      "S231P:label": "gain"
+    },
+    {
+      "@id": "http://example.org#FromModelica.SubController.gain.k",
+      "S231P:isFinal": true,
+      "S231P:value": 0.5
+    },
+    {
+      "@id": "http://example.org#FromModelica.SubController.gain.y",
+      "S231P:isConnectedTo": {
+        "@id": "http://example.org#FromModelica.SubController.y"
+      }
+    },
+    {
+      "@id": "http://example.org#FromModelica.SubController.u",
+      "@type": "S231P:RealInput",
+      "S231P:accessSpecifier": "public",
+      "S231P:description": "Input signal",
+      "S231P:isConnectedTo": {
+        "@id": "http://example.org#FromModelica.SubController.gain.u"
+      },
+      "S231P:label": "u"
+    },
+    {
+      "@id": "http://example.org#FromModelica.SubController.y",
+      "@type": "S231P:RealOutput",
+      "S231P:accessSpecifier": "public",
+      "S231P:description": "Output signal",
+      "S231P:label": "y"
+    }
+  ]
+}

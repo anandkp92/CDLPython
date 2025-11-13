@@ -79,6 +79,50 @@ class BlockInstance:
         }
     }
 
+    def is_standard_cdl_block(self) -> bool:
+        """Check if this is a standard CDL library block
+
+        Returns:
+            True if block type contains 'CDL' (standard library block)
+            False otherwise (custom/user-defined block)
+        """
+        return 'CDL' in self.block_type.split('.')
+
+    def is_custom_block(self) -> bool:
+        """Check if this is a custom/user-defined block
+
+        Returns:
+            True if not a standard CDL block
+        """
+        return not self.is_standard_cdl_block()
+
+    def get_custom_block_name(self) -> str:
+        """Extract the simple name from a custom block type
+
+        For custom blocks like:
+          - "ex:SubController" -> "SubController"
+          - "http://example.org#FromModelica.SubController" -> "SubController"
+          - "MyPackage.MyBlock" -> "MyBlock"
+
+        Returns:
+            Simple block name without namespace or path
+        """
+        block_type = self.block_type
+
+        # Strip namespace prefix (e.g., "ex:")
+        if ':' in block_type:
+            block_type = block_type.split(':', 1)[1]
+
+        # Extract after # for URIs
+        if '#' in block_type:
+            block_type = block_type.split('#', 1)[1]
+
+        # Get last part after dots
+        if '.' in block_type:
+            return block_type.split('.')[-1]
+
+        return block_type
+
     def get_python_import_path(self) -> Tuple[str, str]:
         """Convert CDL path to Python import path
 
@@ -111,7 +155,14 @@ class BlockInstance:
 
         Stateful blocks (integrators, PIDs, timers, delays, etc.)
         require a TimeManager for time-dependent operations.
+
+        Custom blocks are assumed to handle their own time management internally.
         """
+        # Custom blocks don't require time manager from parent
+        # (they manage their own if needed)
+        if self.is_custom_block():
+            return False
+
         _, class_name = self.get_python_import_path()
         module_path, _ = self.get_python_import_path()
 
@@ -173,7 +224,7 @@ class CDLModel:
     connections: List[Connection] = field(default_factory=list)
 
     def get_required_imports(self) -> Dict[str, Set[str]]:
-        """Get all CDL imports needed
+        """Get all CDL imports needed (only standard blocks)
 
         Returns:
             Dictionary mapping module paths to set of class names
@@ -181,10 +232,16 @@ class CDLModel:
                 "cdl_python.CDL.Reals": {"Add", "MultiplyByParameter"},
                 "cdl_python.CDL.Logical": {"And"}
             }
+
+        Note: Custom blocks are not included - they are imported separately
         """
         imports = {}
 
         for instance in self.instances:
+            # Skip custom blocks - they're handled separately
+            if instance.is_custom_block():
+                continue
+
             module_path, class_name = instance.get_python_import_path()
 
             if module_path not in imports:

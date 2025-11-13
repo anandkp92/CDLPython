@@ -430,8 +430,10 @@ class CXFParser:
             List of tuples: (port_id, connectedTo_id, is_input_port)
             is_input_port indicates if the port is an input (affects connection direction)
         """
-        # Use dict to avoid duplicates: port_id -> (target_id, is_input)
-        connections_dict = {}
+        # Use list to collect all connections (including multiple from same port)
+        connections_list = []
+        # Track seen connections to avoid duplicates
+        seen = set()
 
         # Helper to extract connection from port object
         def extract_connection(port_obj, is_input):
@@ -442,19 +444,39 @@ class CXFParser:
             if not port_data or '@id' not in port_data:
                 return
 
+            port_id = port_data['@id']
+
             # Check for connectedTo or isConnectedTo
             connected = self._get_prop(port_data, 'connectedTo') or self._get_prop(port_data, 'isConnectedTo')
             if connected:
-                # Extract @id from connection target
-                if isinstance(connected, dict) and '@id' in connected:
-                    target_id = connected['@id']
-                elif isinstance(connected, str):
-                    target_id = connected
+                # Handle list of connections (port connected to multiple targets)
+                if isinstance(connected, list):
+                    for conn_item in connected:
+                        if isinstance(conn_item, dict) and '@id' in conn_item:
+                            target_id = conn_item['@id']
+                        elif isinstance(conn_item, str):
+                            target_id = conn_item
+                        else:
+                            continue
+                        # Add if not already seen
+                        conn_tuple = (port_id, target_id, is_input)
+                        if conn_tuple not in seen:
+                            connections_list.append(conn_tuple)
+                            seen.add(conn_tuple)
                 else:
-                    return
+                    # Single connection
+                    if isinstance(connected, dict) and '@id' in connected:
+                        target_id = connected['@id']
+                    elif isinstance(connected, str):
+                        target_id = connected
+                    else:
+                        return
 
-                # Store in dict to avoid duplicates
-                connections_dict[port_data['@id']] = (target_id, is_input)
+                    # Add if not already seen
+                    conn_tuple = (port_id, target_id, is_input)
+                    if conn_tuple not in seen:
+                        connections_list.append(conn_tuple)
+                        seen.add(conn_tuple)
 
         # Check inputs - for inputs, connectedTo/isConnectedTo is the SOURCE
         has_input = self._get_prop(block_data, 'hasInput')
@@ -491,12 +513,13 @@ class CXFParser:
                 block_obj = self._resolve_ref(block_ref, block_ref)
                 if block_obj and isinstance(block_obj, dict):
                     sub_connections = self._extract_port_connections(block_obj)
-                    # Merge sub-connections into our dict
-                    for port_id, target_id, is_input in sub_connections:
-                        connections_dict[port_id] = (target_id, is_input)
+                    # Merge sub-connections into our list (avoiding duplicates)
+                    for conn_tuple in sub_connections:
+                        if conn_tuple not in seen:
+                            connections_list.append(conn_tuple)
+                            seen.add(conn_tuple)
 
-        # Convert dict back to list of tuples
-        return [(port_id, target_id, is_input) for port_id, (target_id, is_input) in connections_dict.items()]
+        return connections_list
 
     def _parse_port_id(
         self,

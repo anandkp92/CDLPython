@@ -83,6 +83,8 @@ export MODELICAJSONPATH=/path/to/modelica-json
 
 ### Translating a CDL Sequence
 
+#### Simple Translation (Standard CDL Blocks Only)
+
 ```bash
 # Step 1: Convert CDL to CXF using modelica-json
 node $MODELICAJSONPATH/app.js \
@@ -115,6 +117,42 @@ with open('sequence.py', 'w') as f:
 # Step 3: Run the generated Python sequence
 python sequence.py --mode simulation  # or --mode realtime
 ```
+
+#### Recursive Translation (With Custom Blocks)
+
+For models that use custom user-defined blocks, use the recursive translator:
+
+```python
+from pathlib import Path
+from cdl_translator.translator import translate_cxf_recursive
+
+# Translate a model and all its custom block dependencies
+# Automatically finds custom block CXF files in the same directory
+generated_code = translate_cxf_recursive(
+    cxf_path='path/to/MyController.jsonld',
+    output_dir='generated/',
+    search_paths=['path/to/custom_blocks/']  # Optional: additional search paths
+)
+
+# Result: Multiple Python files generated
+# - generated/SubController.py (custom block)
+# - generated/MyController.py (main model, imports SubController)
+```
+
+**How it works:**
+1. Parses the main CXF file
+2. Identifies custom blocks (blocks without 'CDL' in their type path)
+3. Searches for custom block CXF files in:
+   - Same directory as main CXF file
+   - Additional search paths (if provided)
+4. Recursively translates all dependencies (depth-first)
+5. Generates one Python file per block
+6. Detects and reports circular dependencies
+
+**Custom Block Requirements:**
+- Custom block CXF files must be named `{BlockName}.jsonld` or `{BlockName}.json`
+- Must be in the same directory as the parent CXF or in search paths
+- Can be nested (custom blocks can use other custom blocks)
 
 ### Direct Library Usage (Advanced)
 
@@ -160,17 +198,27 @@ Parser to convert CXF JSON format to executable Python code.
 - ✅ CXF JSON parsing (S231P namespace support)
 - ✅ @graph and @id resolution
 - ✅ Block instantiation code generation
-- ✅ Connection mapping (all types)
+- ✅ Connection mapping (all types, including multi-target)
 - ✅ Parameter assignment
 - ✅ Python code generation (template-based)
 - ✅ Model validation with error reporting
 - ✅ Topological sorting for computation order
-- ✅ Comprehensive test suite (25 tests, 100% passing)
+- ✅ **Recursive translation with custom blocks**
+- ✅ **CXF file resolution (relative and absolute paths)**
+- ✅ **Circular dependency detection**
+- ✅ Comprehensive test suite (40 tests, 100% passing)
 
-**Test Results:** 328/334 tests passing (98.2%)
+**Test Results:** 343/349 tests passing (98.3%)
 - ✅ 100% success for S231P format (production standard)
 - ✅ Generated code executes correctly
 - ✅ Full validation pipeline working
+- ✅ Custom blocks translate and execute correctly
+
+**Key Features:**
+- **Custom Block Support:** Translates user-defined composite blocks recursively
+- **Multi-file Generation:** Each custom block becomes a separate Python file
+- **Smart Import Management:** Automatically generates imports for both standard CDL blocks and custom blocks
+- **Connection Handling:** Supports ports connected to multiple targets (fan-out)
 
 See [Translation Example](#translation-example) below for a complete demonstration.
 
@@ -501,11 +549,15 @@ Follow the established patterns in the existing code:
 - [x] CXF JSON parser (S231P namespace support)
 - [x] Internal model representation with validation
 - [x] Block instantiation generator
-- [x] Connection mapper (all connection types)
+- [x] Connection mapper (all connection types, including multi-target)
 - [x] Parameter assignment
 - [x] Python code generation (template-based)
 - [x] Topological sorting for computation order
-- [x] Test suite (25 tests, 100% passing)
+- [x] Recursive translation with custom blocks
+- [x] CXF file resolution (relative and absolute paths)
+- [x] Circular dependency detection
+- [x] Multi-file generation for custom blocks
+- [x] Test suite (40 tests, 100% passing)
 - [x] Test with example sequences (4/4 production files)
 
 ### Future: Step 3 - Runtime Environment (CPRE)
