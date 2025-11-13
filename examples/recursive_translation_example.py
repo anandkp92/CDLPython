@@ -1,30 +1,48 @@
 """
-Example: Recursive Translation with Custom Blocks
+Example: CDL Translation with Unified API
 
-This example demonstrates how to translate CDL models that contain
-user-defined custom blocks. The translator will automatically:
-1. Identify custom blocks in the main model
+This example demonstrates the unified translate_cxf() function that
+automatically handles both simple and complex models:
+- Simple models (standard CDL blocks only) → one Python file
+- Complex models (with custom blocks) → multiple Python files (recursive)
+
+The translator will automatically:
+1. Identify custom blocks in the main model (if any)
 2. Find their CXF definition files
 3. Recursively translate all dependencies
 4. Generate one Python file per block
 
-Example Structure:
+Examples in this script:
+1. Complex model with custom blocks (MyController → SubController)
+2. Simple model with standard blocks only (CustomPWithLimiter)
+3. Testing generated code execution
+4. Using RecursiveTranslator class directly
+5. Model structure analysis
+6. Error handling
+
+Complex Model Structure:
   MyController.jsonld (uses SubController)
     └─> SubController.jsonld (uses standard CDL blocks)
 
-Result:
-  generated/SubController.py
-  generated/MyController.py (imports SubController)
+  Result:
+    generated/SubController.py
+    generated/MyController.py (imports SubController)
+
+Simple Model Structure:
+  CustomPWithLimiter.jsonld (standard CDL blocks only)
+
+  Result:
+    generated/CustomPWithLimiter.py
 """
 
 from pathlib import Path
-from cdl_translator.translator import translate_cxf_recursive, RecursiveTranslator
+from cdl_translator.translator import translate_cxf, RecursiveTranslator
 import sys
 import json
 
-# Example 1: Basic recursive translation
+# Example 1: Unified translation (handles both simple and complex models)
 print("=" * 70)
-print("Example 1: Basic Recursive Translation")
+print("Example 1: Unified Translation API")
 print("=" * 70)
 print()
 
@@ -33,11 +51,12 @@ fixtures_dir = Path(__file__).parent.parent / "tests" / "translator" / "fixtures
 output_dir = Path(__file__).parent / "output" / "recursive"
 
 # Translate MyController (which uses custom SubController blocks)
+# The same function works for simple models too!
 print(f"Translating: {fixtures_dir / 'MyController.jsonld'}")
 print(f"Output dir: {output_dir}")
 print()
 
-generated_code = translate_cxf_recursive(
+generated_code = translate_cxf(
     cxf_path=fixtures_dir / "MyController.jsonld",
     output_dir=output_dir
 )
@@ -49,9 +68,35 @@ for block_name in generated_code.keys():
 print()
 
 
-# Example 2: Test the generated code
+# Example 2: Simple model (no custom blocks)
 print("=" * 70)
-print("Example 2: Testing Generated Code")
+print("Example 2: Simple Model Translation")
+print("=" * 70)
+print()
+
+# Translate a simple model with no custom blocks
+print(f"Translating: {fixtures_dir / 'CustomPWithLimiter.jsonld'}")
+print("(This model only uses standard CDL blocks)")
+print()
+
+simple_output_dir = Path(__file__).parent / "output" / "simple"
+generated_simple = translate_cxf(
+    cxf_path=fixtures_dir / "CustomPWithLimiter.jsonld",
+    output_dir=simple_output_dir
+)
+
+print(f"✓ Generated {len(generated_simple)} file (simple model):")
+for block_name in generated_simple.keys():
+    file_path = simple_output_dir / f"{block_name}.py"
+    print(f"  - {file_path} ({len(generated_simple[block_name])} bytes)")
+print()
+print("Note: Same translate_cxf() function works for both simple and complex models!")
+print()
+
+
+# Example 3: Test the generated code
+print("=" * 70)
+print("Example 3: Testing Generated Code")
 print("=" * 70)
 print()
 
@@ -92,9 +137,9 @@ finally:
         del sys.modules['MyController']
 
 
-# Example 3: Using the RecursiveTranslator class directly
+# Example 4: Using the RecursiveTranslator class directly
 print("=" * 70)
-print("Example 3: Using RecursiveTranslator Class")
+print("Example 4: Using RecursiveTranslator Class")
 print("=" * 70)
 print()
 
@@ -122,9 +167,9 @@ print(f"  Code generated for: {list(generated.keys())}")
 print()
 
 
-# Example 4: Viewing model structure
+# Example 5: Viewing model structure
 print("=" * 70)
-print("Example 4: Model Structure Analysis")
+print("Example 5: Model Structure Analysis")
 print("=" * 70)
 print()
 
@@ -172,16 +217,16 @@ for i, inst in enumerate(model.get_computation_order(), 1):
 print()
 
 
-# Example 5: Error handling
+# Example 6: Error handling
 print("=" * 70)
-print("Example 5: Error Handling")
+print("Example 6: Error Handling")
 print("=" * 70)
 print()
 
 # Try to translate a non-existent file
 print("Testing error handling for missing file...")
 try:
-    translate_cxf_recursive(
+    translate_cxf(
         cxf_path=fixtures_dir / "NonExistent.jsonld",
         output_dir=output_dir
     )

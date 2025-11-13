@@ -83,8 +83,6 @@ export MODELICAJSONPATH=/path/to/modelica-json
 
 ### Translating a CDL Sequence
 
-#### Simple Translation (Standard CDL Blocks Only)
-
 ```bash
 # Step 1: Convert CDL to CXF using modelica-json
 node $MODELICAJSONPATH/app.js \
@@ -93,66 +91,50 @@ node $MODELICAJSONPATH/app.js \
     -d output_dir
 
 # This generates CXF JSON files in output_dir/
-
-# Step 2: Translate CXF to Python (Python API)
-python -c "
-from cdl_translator.parser import CXFParser
-from cdl_translator.codegen import CodeGenerator
-import json
-
-# Parse CXF
-with open('output_dir/sequence.jsonld', 'r') as f:
-    parser = CXFParser()
-    model = parser.parse_dict(json.load(f))
-
-# Generate Python
-codegen = CodeGenerator()
-code = codegen.generate(model)
-
-# Save
-with open('sequence.py', 'w') as f:
-    f.write(code)
-"
-
-# Step 3: Run the generated Python sequence
-python sequence.py --mode simulation  # or --mode realtime
 ```
-
-#### Recursive Translation (With Custom Blocks)
-
-For models that use custom user-defined blocks, use the recursive translator:
 
 ```python
+# Step 2: Translate CXF to Python
 from pathlib import Path
-from cdl_translator.translator import translate_cxf_recursive
+from cdl_translator.translator import translate_cxf
 
-# Translate a model and all its custom block dependencies
-# Automatically finds custom block CXF files in the same directory
-generated_code = translate_cxf_recursive(
-    cxf_path='path/to/MyController.jsonld',
+# Translate any CXF file - automatically handles both simple and complex models
+generated_code = translate_cxf(
+    cxf_path='output_dir/sequence.jsonld',
     output_dir='generated/',
-    search_paths=['path/to/custom_blocks/']  # Optional: additional search paths
+    search_paths=['path/to/custom_blocks/']  # Optional: for custom blocks
 )
 
-# Result: Multiple Python files generated
-# - generated/SubController.py (custom block)
-# - generated/MyController.py (main model, imports SubController)
+# For simple models (only standard CDL blocks):
+#   - Generates one Python file (e.g., generated/SimpleController.py)
+#
+# For complex models (with custom blocks):
+#   - Automatically finds and translates custom block dependencies
+#   - Generates one Python file per block
+#   - Example: generated/SubController.py, generated/MyController.py
 ```
 
-**How it works:**
+**How Translation Works:**
 1. Parses the main CXF file
-2. Identifies custom blocks (blocks without 'CDL' in their type path)
-3. Searches for custom block CXF files in:
-   - Same directory as main CXF file
-   - Additional search paths (if provided)
-4. Recursively translates all dependencies (depth-first)
-5. Generates one Python file per block
-6. Detects and reports circular dependencies
+2. If custom blocks are detected (blocks without 'CDL' in type path):
+   - Searches for custom block CXF files in same directory and search paths
+   - Recursively translates all dependencies (depth-first)
+   - Generates one Python file per block
+3. If only standard CDL blocks are used:
+   - Generates a single Python file
+4. Automatically detects and reports circular dependencies
 
 **Custom Block Requirements:**
 - Custom block CXF files must be named `{BlockName}.jsonld` or `{BlockName}.json`
-- Must be in the same directory as the parent CXF or in search paths
+- Must be in the same directory as parent CXF or in search paths
 - Can be nested (custom blocks can use other custom blocks)
+
+```bash
+# Step 3: Run the generated Python sequence
+python generated/sequence.py --mode simulation  # or --mode realtime
+```
+
+> **📖 For detailed examples and complete API reference, see [TRANSLATION_GUIDE.md](TRANSLATION_GUIDE.md)**
 
 ### Direct Library Usage (Advanced)
 

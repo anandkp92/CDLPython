@@ -188,12 +188,16 @@ class RecursiveTranslator:
         return code
 
 
-def translate_cxf_recursive(
+def translate_cxf(
     cxf_path: Path,
     output_dir: Optional[Path] = None,
     search_paths: Optional[List[Path]] = None
 ) -> Dict[str, str]:
-    """Convenience function to translate a CXF file recursively
+    """Translate a CXF file to Python code
+
+    Automatically handles both:
+    - Simple models (only standard CDL blocks) - generates one Python file
+    - Complex models (with custom blocks) - recursively translates all dependencies
 
     Args:
         cxf_path: Path to the main CXF file
@@ -203,9 +207,27 @@ def translate_cxf_recursive(
     Returns:
         Dictionary mapping block names to generated Python code
 
-    Example:
-        >>> generated = translate_cxf_recursive('MyController.jsonld', output_dir='generated/')
+    Examples:
+        Simple model (no custom blocks):
+        >>> generated = translate_cxf('SimpleController.jsonld', output_dir='generated/')
+        >>> # Creates: generated/SimpleController.py
+
+        Complex model (with custom blocks):
+        >>> generated = translate_cxf('MyController.jsonld', output_dir='generated/')
         >>> # Creates: generated/SubController.py, generated/MyController.py
     """
     translator = RecursiveTranslator(search_paths)
     return translator.translate_file(cxf_path, output_dir)
+
+
+# Keep old name for backward compatibility
+def translate_cxf_recursive(
+    cxf_path: Path,
+    output_dir: Optional[Path] = None,
+    search_paths: Optional[List[Path]] = None
+) -> Dict[str, str]:
+    """Deprecated: Use translate_cxf() instead
+
+    This function is kept for backward compatibility.
+    """
+    return translate_cxf(cxf_path, output_dir, search_paths)
