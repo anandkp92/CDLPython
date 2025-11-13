@@ -4,6 +4,39 @@ This directory contains example implementations demonstrating how to use the CDL
 
 ## Available Examples
 
+### `task1_custom_p_with_limiter_demo.ipynb` 🆕 **Jupyter Notebook**
+
+**Description:** Interactive demonstration of the Custom P Controller with Limiter in both simulation and real-time modes
+
+**What it demonstrates:**
+- **Simulation Mode:** Using CDL source blocks (Constant, Sin) with fine timesteps for smooth curves
+- **Real-Time Mode:** Mimicking BACnet controller receiving sensor data every 1 second
+- Data collection with pandas DataFrames
+- Visualization of controller behavior and limiter activation
+- Wall-clock timestamping for real-time mode
+
+**Prerequisites:**
+```bash
+# Install package
+pip install -e .
+
+# Install notebook dependencies
+pip install jupyter pandas numpy matplotlib
+```
+
+**Run:**
+```bash
+jupyter notebook examples/task1_custom_p_with_limiter_demo.ipynb
+```
+
+**Or test imports first:**
+```bash
+cd examples
+python test_notebook_imports.py
+```
+
+---
+
 ### `custom_p_with_limiter.py`
 
 **Description:** Custom proportional controller with variable output limiter
