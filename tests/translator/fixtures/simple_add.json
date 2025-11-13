@@ -1,0 +1,54 @@
+{
+  "@context": "http://obc.lbl.gov/schema/cxf/1.0/context.jsonld",
+  "@graph": [
+    {
+      "@id": "SimpleAdder",
+      "@type": "CompositeBlock",
+      "description": "Simple model that adds two inputs",
+      "hasInput": [
+        {
+          "@id": "SimpleAdder#u1",
+          "@type": "RealInput",
+          "description": "First input"
+        },
+        {
+          "@id": "SimpleAdder#u2",
+          "@type": "RealInput",
+          "description": "Second input"
+        }
+      ],
+      "hasOutput": [
+        {
+          "@id": "SimpleAdder#y",
+          "@type": "RealOutput",
+          "description": "Sum of inputs"
+        }
+      ],
+      "containsBlock": [
+        {
+          "@id": "SimpleAdder#adder",
+          "@type": "Buildings.Controls.OBC.CDL.Reals.Add",
+          "hasInput": [
+            {
+              "@id": "SimpleAdder#adder.u1",
+              "@type": "RealInput",
+              "connectedTo": "SimpleAdder#u1"
+            },
+            {
+              "@id": "SimpleAdder#adder.u2",
+              "@type": "RealInput",
+              "connectedTo": "SimpleAdder#u2"
+            }
+          ],
+          "hasOutput": [
+            {
+              "@id": "SimpleAdder#adder.y",
+              "@type": "RealOutput",
+              "connectedTo": "SimpleAdder#y"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

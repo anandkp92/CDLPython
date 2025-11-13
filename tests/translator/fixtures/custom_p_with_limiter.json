@@ -1,0 +1,87 @@
+{
+  "@context": "http://obc.lbl.gov/schema/cxf/1.0/context.jsonld",
+  "@graph": [
+    {
+      "@id": "CustomPWithLimiter",
+      "@type": "CompositeBlock",
+      "description": "P controller with variable output limiter",
+      "hasParameter": [
+        {
+          "@id": "CustomPWithLimiter#k",
+          "@type": "Real",
+          "value": 2.0,
+          "description": "Constant gain"
+        }
+      ],
+      "hasInput": [
+        {
+          "@id": "CustomPWithLimiter#e",
+          "@type": "RealInput",
+          "description": "Control error"
+        },
+        {
+          "@id": "CustomPWithLimiter#yMax",
+          "@type": "RealInput",
+          "description": "Maximum value of output signal"
+        }
+      ],
+      "hasOutput": [
+        {
+          "@id": "CustomPWithLimiter#y",
+          "@type": "RealOutput",
+          "description": "Control signal"
+        }
+      ],
+      "containsBlock": [
+        {
+          "@id": "CustomPWithLimiter#gain",
+          "@type": "Buildings.Controls.OBC.CDL.Reals.MultiplyByParameter",
+          "hasParameter": [
+            {
+              "@id": "CustomPWithLimiter#gain.k",
+              "@type": "Real",
+              "value": "@parent.k",
+              "description": "Parameter value from parent"
+            }
+          ],
+          "hasInput": [
+            {
+              "@id": "CustomPWithLimiter#gain.u",
+              "@type": "RealInput",
+              "connectedTo": "CustomPWithLimiter#e"
+            }
+          ],
+          "hasOutput": [
+            {
+              "@id": "CustomPWithLimiter#gain.y",
+              "@type": "RealOutput"
+            }
+          ]
+        },
+        {
+          "@id": "CustomPWithLimiter#minValue",
+          "@type": "Buildings.Controls.OBC.CDL.Reals.Min",
+          "hasInput": [
+            {
+              "@id": "CustomPWithLimiter#minValue.u1",
+              "@type": "RealInput",
+              "connectedTo": "CustomPWithLimiter#yMax"
+            },
+            {
+              "@id": "CustomPWithLimiter#minValue.u2",
+              "@type": "RealInput",
+              "connectedTo": "CustomPWithLimiter#gain.y"
+            }
+          ],
+          "hasOutput": [
+            {
+              "@id": "CustomPWithLimiter#minValue.y",
+              "@type": "RealOutput",
+              "connectedTo": "CustomPWithLimiter#y"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
