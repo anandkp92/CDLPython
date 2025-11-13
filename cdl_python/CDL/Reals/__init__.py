@@ -41,6 +41,9 @@ from cdl_python.CDL.Reals.Sqrt import Sqrt
 from cdl_python.CDL.Reals.Subtract import Subtract
 from cdl_python.CDL.Reals.Switch import Switch
 from cdl_python.CDL.Reals.Tan import Tan
+from cdl_python.CDL.Reals.Derivative import Derivative
+from cdl_python.CDL.Reals.LimitSlewRate import LimitSlewRate
+from cdl_python.CDL.Reals.MovingAverage import MovingAverage
 
 __all__ = [
     "Abs",
@@ -83,4 +86,7 @@ __all__ = [
     "Subtract",
     "Switch",
     "Tan",
+    "Derivative",
+    "LimitSlewRate",
+    "MovingAverage",
 ]

@@ -23,6 +23,8 @@ from cdl_python.CDL.Logical.Timer import Timer
 from cdl_python.CDL.Logical.TimerAccumulating import TimerAccumulating
 from cdl_python.CDL.Logical.TrueDelay import TrueDelay
 from cdl_python.CDL.Logical.TrueFalseHold import TrueFalseHold
+from cdl_python.CDL.Logical.Proof import Proof
+from cdl_python.CDL.Logical.VariablePulse import VariablePulse
 
 __all__ = [
     "And",
@@ -44,4 +46,6 @@ __all__ = [
     "TimerAccumulating",
     "TrueDelay",
     "TrueFalseHold",
+    "Proof",
+    "VariablePulse",
 ]

@@ -183,15 +183,21 @@ class MyController:
 
 See the main [README.md](../README.md) for a complete list of implemented blocks.
 
-**Currently Available (52 blocks):**
-- Reals: 34 blocks (arithmetic, math, comparison, control)
-- Logical: 4 blocks (And, Or, Not, Edge)
-- Integers: 10 blocks (arithmetic, comparison, switching)
-- Conversions: 4 blocks (type conversions) ✅ Complete!
+**Currently Available: ALL 122 CDL blocks (100% complete!) 🎉**
+
+**All Packages Complete:**
+- Integers: 21 blocks ✅ (arithmetic, comparison, control flow)
+- Conversions: 4 blocks ✅ (type conversions)
+- Types: 4 enumerations ✅ (controller types, time specs)
+- Routing: 15 blocks ✅ (extractors, replicators, filters)
+- Discrete: 7 blocks ✅ (sampling, hold, delay, triggered operations)
+- Reals: 45 blocks ✅ (arithmetic, math, comparison, control, sources, continuous-time)
+- Logical: 21 blocks ✅ (logic gates, timers, edge detection, verification)
+- Utilities: 2 blocks ✅ (Assert, SunRiseSet)
+- Psychrometrics: 3 blocks ✅ (dew point, enthalpy, wet bulb)
 
 ## Need Help?
 
 - **CDL Specification:** https://obc.lbl.gov/specification/cdl.html
 - **CDL Block Documentation:** https://simulationresearch.lbl.gov/modelica/releases/v12.0.0/help/Buildings_Controls_OBC_CDL.html
 - **Main README:** [../README.md](../README.md)
-- **Implementation Status:** [../claude_log/IMPLEMENTATION_STATUS.md](../claude_log/IMPLEMENTATION_STATUS.md)
