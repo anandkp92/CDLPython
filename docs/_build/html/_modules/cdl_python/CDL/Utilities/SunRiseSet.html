@@ -1,0 +1,427 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cdl_python.CDL.Utilities.SunRiseSet &mdash; CDL Python 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            CDL Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation.html#virtual-environment-setup-recommended">Virtual Environment Setup (Recommended)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation.html#basic-installation">Basic Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation.html#documentation-installation">Documentation Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation.html#complete-installation-development-docs">Complete Installation (Development + Docs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation.html#verify-installation">Verify Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation.html#requirements-files">Requirements Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart.html">Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quickstart.html#basic-concepts">Basic Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quickstart.html#your-first-cdl-block">Your First CDL Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quickstart.html#using-time-dependent-blocks">Using Time-Dependent Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quickstart.html#building-a-simple-controller">Building a Simple Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quickstart.html#using-pulse-generators">Using Pulse Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quickstart.html#using-time-tables">Using Time Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quickstart.html#translating-cxf-to-python">Translating CXF to Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quickstart.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api/cdl_python.html">cdl_python package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/cdl_python.html#core-modules">Core Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/cdl_python.base.html">cdl_python.base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/cdl_python.time_manager.html">cdl_python.time_manager</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/cdl_python.html#cdl-blocks">CDL Blocks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/cdl_python.html#reals-package">Reals Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/cdl_python.html#integers-package">Integers Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/cdl_python.html#logical-package">Logical Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/cdl_python.html#conversions-package">Conversions Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/cdl_python.html#discrete-package">Discrete Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/cdl_python.html#routing-package">Routing Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/cdl_python.html#utilities-package">Utilities Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/cdl_python.html#psychrometrics-package">Psychrometrics Package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/cdl_python.html#module-reference">Module Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/cdl_python.html#module-cdl_python.base">base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/cdl_python.html#module-cdl_python.time_manager">time_manager module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api/cdl_translator.html">cdl_translator package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/cdl_translator.html#package-overview">Package Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/cdl_translator.html">cdl_translator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/cdl_translator.html#modules">Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/cdl_translator.html#parser-module">parser module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/cdl_translator.html#translator-module">translator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/cdl_translator.html#cli-module">cli module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/cdl_translator.html#key-classes">Key Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/cdl_translator.html#cxfparser">CXFParser</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/cdl_translator.html#cdlmodel">CDLModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/cdl_translator.html#blockinstance">BlockInstance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/cdl_translator.html#connection">Connection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/cdl_translator.html#pythontranslator">PythonTranslator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/cdl_translator.html#usage-example">Usage Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/cdl_translator.html#command-line-usage">Command-Line Usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/sources.html">Source Block Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/sources.html#real-valued-sources">Real-Valued Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../examples/sources.html#constant-source">Constant Source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../examples/sources.html#sine-wave-generator">Sine Wave Generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../examples/sources.html#pulse-generator">Pulse Generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../examples/sources.html#ramp-generator">Ramp Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/sources.html#integer-sources">Integer Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../examples/sources.html#integer-constant">Integer Constant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../examples/sources.html#integer-pulse">Integer Pulse</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/sources.html#boolean-sources">Boolean Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../examples/sources.html#boolean-constant">Boolean Constant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../examples/sources.html#boolean-pulse">Boolean Pulse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../examples/sources.html#sample-trigger">Sample Trigger</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/sources.html#calendar-time">Calendar Time</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/control_systems.html">Control System Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/control_systems.html#proportional-controller">Proportional Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/control_systems.html#pid-controller-example">PID Controller Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/control_systems.html#on-off-controller-with-hysteresis">On/Off Controller with Hysteresis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/control_systems.html#limiter-with-proportional-controller">Limiter with Proportional Controller</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/time_tables.html">Time Table Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/time_tables.html#daily-temperature-schedule">Daily Temperature Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/time_tables.html#weekly-occupancy-schedule">Weekly Occupancy Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/time_tables.html#multi-column-time-table">Multi-Column Time Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/time_tables.html#constant-segments-step-changes">Constant Segments (Step Changes)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/cxf_translation.html">CXF Translation Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/cxf_translation.html#basic-translation">Basic Translation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../examples/cxf_translation.html#using-the-python-api">Using the Python API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../examples/cxf_translation.html#using-the-command-line-interface">Using the Command-Line Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/cxf_translation.html#example-cxf-file">Example CXF File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/cxf_translation.html#generated-python-code">Generated Python Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/cxf_translation.html#using-generated-code">Using Generated Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/cxf_translation.html#inspecting-parsed-models">Inspecting Parsed Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/cxf_translation.html#batch-translation">Batch Translation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/index.html#basic-examples">Basic Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/index.html#source-blocks">Source Blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/index.html#control-systems">Control Systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/index.html#time-tables-and-scheduling">Time Tables and Scheduling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../examples/index.html#cxf-translation">CXF Translation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Additional Information:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog.html#version-0-1-0-current">Version 0.1.0 (Current)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../changelog.html#features">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../changelog.html#known-issues">Known Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../changelog.html#upcoming-features">Upcoming Features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing.html#development-workflow">Development Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../contributing.html#running-tests">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../contributing.html#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing.html#adding-a-new-cdl-block">Adding a New CDL Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing.html#submitting-changes">Submitting Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing.html#pull-request-guidelines">Pull Request Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing.html#reporting-issues">Reporting Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing.html#questions">Questions?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../license.html#mit-license">MIT License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../license.html#third-party-licenses">Third-Party Licenses</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">CDL Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">cdl_python.CDL.Utilities.SunRiseSet</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for cdl_python.CDL.Utilities.SunRiseSet</h1><div class="highlight"><pre>
+<span></span><span class="c1"># ABOUTME: SunRiseSet - Compute sunrise and sunset times</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cdl_python.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CDLBlock</span>
+
+
+<div class="viewcode-block" id="SunRiseSet">
+<a class="viewcode-back" href="../../../../api/generated/cdl_python.CDL.Utilities.SunRiseSet.html#cdl_python.CDL.Utilities.SunRiseSet">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SunRiseSet</span><span class="p">(</span><span class="n">CDLBlock</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute sunrise and sunset times for a given location and date</span>
+
+<span class="sd">    Calculates sunrise and sunset times using simplified astronomical algorithms.</span>
+<span class="sd">    Based on NOAA solar position algorithms.</span>
+
+<span class="sd">    Inputs:</span>
+<span class="sd">    - time: Current time in seconds since start (used to determine day of year)</span>
+<span class="sd">    - latitude: Latitude in degrees (-90 to 90, positive north)</span>
+<span class="sd">    - longitude: Longitude in degrees (-180 to 180, positive east)</span>
+
+<span class="sd">    Outputs:</span>
+<span class="sd">    - tSunRis: Sunrise time in seconds since midnight (local solar time)</span>
+<span class="sd">    - tSunSet: Sunset time in seconds since midnight (local solar time)</span>
+
+<span class="sd">    Used for:</span>
+<span class="sd">    - Daylighting control strategies</span>
+<span class="sd">    - Shading device control</span>
+<span class="sd">    - Optimal start/stop times for HVAC</span>
+<span class="sd">    - Solar tracking systems</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SunRiseSet.__init__">
+<a class="viewcode-back" href="../../../../api/generated/cdl_python.CDL.Utilities.SunRiseSet.html#cdl_python.CDL.Utilities.SunRiseSet.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2024</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize SunRiseSet block</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            year: Year for calculations (affects leap year handling)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">year</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_leap_year</span> <span class="o">=</span> <span class="p">(</span><span class="n">year</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">year</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">year</span> <span class="o">%</span> <span class="mi">400</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_day_of_year</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate day of year from time in seconds</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            time: Time in seconds since start of year</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Day of year (1-365 or 1-366 for leap years)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">seconds_per_day</span> <span class="o">=</span> <span class="mi">86400</span>
+        <span class="n">day</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span> <span class="o">/</span> <span class="n">seconds_per_day</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">max_days</span> <span class="o">=</span> <span class="mi">366</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_leap_year</span> <span class="k">else</span> <span class="mi">365</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">day</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">max_days</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_solar_declination</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">day_of_year</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate solar declination angle</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            day_of_year: Day of year (1-365/366)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Declination angle in radians</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Simplified formula (Spencer 1971)</span>
+        <span class="c1"># Day angle in radians</span>
+        <span class="n">gamma</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">day_of_year</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">365.0</span>
+
+        <span class="c1"># Declination in radians</span>
+        <span class="n">decl</span> <span class="o">=</span> <span class="mf">0.006918</span> <span class="o">-</span> <span class="mf">0.399912</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">gamma</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.070257</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">gamma</span><span class="p">)</span> \
+               <span class="o">-</span> <span class="mf">0.006758</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">gamma</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.000907</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">gamma</span><span class="p">)</span> \
+               <span class="o">-</span> <span class="mf">0.002697</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">gamma</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.00148</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">gamma</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">decl</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_equation_of_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">day_of_year</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate equation of time (correction for solar time)</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            day_of_year: Day of year (1-365/366)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Equation of time in minutes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Day angle</span>
+        <span class="n">gamma</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">day_of_year</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">365.0</span>
+
+        <span class="c1"># Equation of time in minutes (Spencer 1971)</span>
+        <span class="n">eqtime</span> <span class="o">=</span> <span class="mf">229.18</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.000075</span> <span class="o">+</span> <span class="mf">0.001868</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">gamma</span><span class="p">)</span>
+                          <span class="o">-</span> <span class="mf">0.032077</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">gamma</span><span class="p">)</span>
+                          <span class="o">-</span> <span class="mf">0.014615</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">gamma</span><span class="p">)</span>
+                          <span class="o">-</span> <span class="mf">0.040849</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">gamma</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">eqtime</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute sunrise and sunset times</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            time: Current time in seconds since start of year</span>
+<span class="sd">            latitude: Latitude in degrees (-90 to 90, north positive)</span>
+<span class="sd">            longitude: Longitude in degrees (-180 to 180, east positive)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary with:</span>
+<span class="sd">                - &#39;tSunRis&#39;: Sunrise time in seconds since midnight (local solar time)</span>
+<span class="sd">                - &#39;tSunSet&#39;: Sunset time in seconds since midnight (local solar time)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Convert angles to radians</span>
+        <span class="n">lat_rad</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">latitude</span><span class="p">)</span>
+
+        <span class="c1"># Get day of year</span>
+        <span class="n">day_of_year</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_day_of_year</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+
+        <span class="c1"># Calculate solar declination</span>
+        <span class="n">decl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solar_declination</span><span class="p">(</span><span class="n">day_of_year</span><span class="p">)</span>
+
+        <span class="c1"># Calculate hour angle at sunrise/sunset (sun at horizon, zenith = 90°)</span>
+        <span class="c1"># cos(hour_angle) = -tan(lat) * tan(decl)</span>
+        <span class="n">cos_ha</span> <span class="o">=</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">lat_rad</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">decl</span><span class="p">)</span>
+
+        <span class="c1"># Check for polar day/night</span>
+        <span class="k">if</span> <span class="n">cos_ha</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="c1"># Polar night (sun never rises)</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;tSunRis&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;tSunSet&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}</span>
+        <span class="k">elif</span> <span class="n">cos_ha</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">:</span>
+            <span class="c1"># Polar day (sun never sets)</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;tSunRis&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;tSunSet&#39;</span><span class="p">:</span> <span class="mf">86400.0</span><span class="p">}</span>
+
+        <span class="c1"># Hour angle in radians</span>
+        <span class="n">ha</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">cos_ha</span><span class="p">)</span>
+
+        <span class="c1"># Convert hour angle to time (radians to hours)</span>
+        <span class="n">ha_hours</span> <span class="o">=</span> <span class="n">ha</span> <span class="o">*</span> <span class="mf">12.0</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span>
+
+        <span class="c1"># Equation of time correction</span>
+        <span class="n">eqtime</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_equation_of_time</span><span class="p">(</span><span class="n">day_of_year</span><span class="p">)</span>
+
+        <span class="c1"># Solar noon (local solar time) in minutes</span>
+        <span class="n">solar_noon</span> <span class="o">=</span> <span class="mf">720.0</span> <span class="o">-</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">longitude</span> <span class="o">-</span> <span class="n">eqtime</span>
+
+        <span class="c1"># Sunrise and sunset in minutes since midnight</span>
+        <span class="n">sunrise_minutes</span> <span class="o">=</span> <span class="n">solar_noon</span> <span class="o">-</span> <span class="n">ha_hours</span> <span class="o">*</span> <span class="mf">60.0</span>
+        <span class="n">sunset_minutes</span> <span class="o">=</span> <span class="n">solar_noon</span> <span class="o">+</span> <span class="n">ha_hours</span> <span class="o">*</span> <span class="mf">60.0</span>
+
+        <span class="c1"># Convert to seconds</span>
+        <span class="n">tSunRis</span> <span class="o">=</span> <span class="n">sunrise_minutes</span> <span class="o">*</span> <span class="mf">60.0</span>
+        <span class="n">tSunSet</span> <span class="o">=</span> <span class="n">sunset_minutes</span> <span class="o">*</span> <span class="mf">60.0</span>
+
+        <span class="c1"># Clamp to valid range [0, 86400]</span>
+        <span class="n">tSunRis</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mf">86400.0</span><span class="p">,</span> <span class="n">tSunRis</span><span class="p">))</span>
+        <span class="n">tSunSet</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mf">86400.0</span><span class="p">,</span> <span class="n">tSunSet</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;tSunRis&#39;</span><span class="p">:</span> <span class="n">tSunRis</span><span class="p">,</span>
+            <span class="s1">&#39;tSunSet&#39;</span><span class="p">:</span> <span class="n">tSunSet</span>
+        <span class="p">}</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, CDL Python Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

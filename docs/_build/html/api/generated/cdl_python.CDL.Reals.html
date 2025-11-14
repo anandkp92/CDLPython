@@ -1,0 +1,414 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cdl_python.CDL.Reals &mdash; CDL Python 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="cdl_python.CDL.Reals.Abs" href="cdl_python.CDL.Reals.Abs.html" />
+    <link rel="prev" title="cdl_python.time_manager" href="cdl_python.time_manager.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            CDL Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#virtual-environment-setup-recommended">Virtual Environment Setup (Recommended)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#basic-installation">Basic Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#documentation-installation">Documentation Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#complete-installation-development-docs">Complete Installation (Development + Docs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#verify-installation">Verify Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#requirements-files">Requirements Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#basic-concepts">Basic Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#your-first-cdl-block">Your First CDL Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#using-time-dependent-blocks">Using Time-Dependent Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#building-a-simple-controller">Building a Simple Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#using-pulse-generators">Using Pulse Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#using-time-tables">Using Time Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#translating-cxf-to-python">Translating CXF to Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../cdl_python.html">cdl_python package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../cdl_python.html#core-modules">Core Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cdl_python.base.html">cdl_python.base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cdl_python.time_manager.html">cdl_python.time_manager</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="../cdl_python.html#cdl-blocks">CDL Blocks</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../cdl_python.html#reals-package">Reals Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cdl_python.html#integers-package">Integers Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cdl_python.html#logical-package">Logical Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cdl_python.html#conversions-package">Conversions Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cdl_python.html#discrete-package">Discrete Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cdl_python.html#routing-package">Routing Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cdl_python.html#utilities-package">Utilities Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cdl_python.html#psychrometrics-package">Psychrometrics Package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cdl_python.html#module-reference">Module Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cdl_python.html#module-cdl_python.base">base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cdl_python.html#module-cdl_python.time_manager">time_manager module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cdl_translator.html">cdl_translator package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cdl_translator.html#package-overview">Package Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cdl_translator.html">cdl_translator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cdl_translator.html#modules">Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cdl_translator.html#parser-module">parser module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cdl_translator.html#translator-module">translator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cdl_translator.html#cli-module">cli module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cdl_translator.html#key-classes">Key Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cdl_translator.html#cxfparser">CXFParser</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cdl_translator.html#cdlmodel">CDLModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cdl_translator.html#blockinstance">BlockInstance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cdl_translator.html#connection">Connection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cdl_translator.html#pythontranslator">PythonTranslator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cdl_translator.html#usage-example">Usage Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cdl_translator.html#command-line-usage">Command-Line Usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/sources.html">Source Block Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/sources.html#real-valued-sources">Real-Valued Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#constant-source">Constant Source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#sine-wave-generator">Sine Wave Generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#pulse-generator">Pulse Generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#ramp-generator">Ramp Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/sources.html#integer-sources">Integer Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#integer-constant">Integer Constant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#integer-pulse">Integer Pulse</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/sources.html#boolean-sources">Boolean Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#boolean-constant">Boolean Constant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#boolean-pulse">Boolean Pulse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#sample-trigger">Sample Trigger</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/sources.html#calendar-time">Calendar Time</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/control_systems.html">Control System Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/control_systems.html#proportional-controller">Proportional Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/control_systems.html#pid-controller-example">PID Controller Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/control_systems.html#on-off-controller-with-hysteresis">On/Off Controller with Hysteresis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/control_systems.html#limiter-with-proportional-controller">Limiter with Proportional Controller</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/time_tables.html">Time Table Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/time_tables.html#daily-temperature-schedule">Daily Temperature Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/time_tables.html#weekly-occupancy-schedule">Weekly Occupancy Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/time_tables.html#multi-column-time-table">Multi-Column Time Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/time_tables.html#constant-segments-step-changes">Constant Segments (Step Changes)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/cxf_translation.html">CXF Translation Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/cxf_translation.html#basic-translation">Basic Translation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/cxf_translation.html#using-the-python-api">Using the Python API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/cxf_translation.html#using-the-command-line-interface">Using the Command-Line Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/cxf_translation.html#example-cxf-file">Example CXF File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/cxf_translation.html#generated-python-code">Generated Python Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/cxf_translation.html#using-generated-code">Using Generated Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/cxf_translation.html#inspecting-parsed-models">Inspecting Parsed Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/cxf_translation.html#batch-translation">Batch Translation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html#basic-examples">Basic Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/index.html#source-blocks">Source Blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/index.html#control-systems">Control Systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/index.html#time-tables-and-scheduling">Time Tables and Scheduling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/index.html#cxf-translation">CXF Translation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Additional Information:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#version-0-1-0-current">Version 0.1.0 (Current)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#features">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#known-issues">Known Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#upcoming-features">Upcoming Features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#development-workflow">Development Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#running-tests">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#adding-a-new-cdl-block">Adding a New CDL Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#submitting-changes">Submitting Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#pull-request-guidelines">Pull Request Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#reporting-issues">Reporting Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#questions">Questions?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../license.html#mit-license">MIT License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../license.html#third-party-licenses">Third-Party Licenses</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CDL Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../cdl_python.html">cdl_python package</a></li>
+      <li class="breadcrumb-item active">cdl_python.CDL.Reals</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/api/generated/cdl_python.CDL.Reals.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-cdl_python.CDL.Reals">
+<span id="cdl-python-cdl-reals"></span><h1>cdl_python.CDL.Reals<a class="headerlink" href="#module-cdl_python.CDL.Reals" title="Link to this heading"></a></h1>
+<p class="rubric">Modules</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Abs.html#cdl_python.CDL.Reals.Abs" title="cdl_python.CDL.Reals.Abs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Abs</span></code></a></p></td>
+<td><p>Output the absolute value of the input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Acos.html#cdl_python.CDL.Reals.Acos" title="cdl_python.CDL.Reals.Acos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Acos</span></code></a></p></td>
+<td><p>Output the arccosine of the input.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Add.html#cdl_python.CDL.Reals.Add" title="cdl_python.CDL.Reals.Add"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Add</span></code></a></p></td>
+<td><p>Output the sum of two inputs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.AddParameter.html#cdl_python.CDL.Reals.AddParameter" title="cdl_python.CDL.Reals.AddParameter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AddParameter</span></code></a></p></td>
+<td><p>Output the sum of an input plus a parameter.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Asin.html#cdl_python.CDL.Reals.Asin" title="cdl_python.CDL.Reals.Asin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Asin</span></code></a></p></td>
+<td><p>Output the arcsine of the input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Atan.html#cdl_python.CDL.Reals.Atan" title="cdl_python.CDL.Reals.Atan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Atan</span></code></a></p></td>
+<td><p>Output the arctangent of the input.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Atan2.html#cdl_python.CDL.Reals.Atan2" title="cdl_python.CDL.Reals.Atan2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Atan2</span></code></a></p></td>
+<td><p>Output atan(u1/u2) in the correct quadrant.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Average.html#cdl_python.CDL.Reals.Average" title="cdl_python.CDL.Reals.Average"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Average</span></code></a></p></td>
+<td><p>Output the average of two inputs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Cos.html#cdl_python.CDL.Reals.Cos" title="cdl_python.CDL.Reals.Cos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Cos</span></code></a></p></td>
+<td><p>Output the cosine of the input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Derivative.html#cdl_python.CDL.Reals.Derivative" title="cdl_python.CDL.Reals.Derivative"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Derivative</span></code></a></p></td>
+<td><p>Compute time derivative of input signal</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Divide.html#cdl_python.CDL.Reals.Divide" title="cdl_python.CDL.Reals.Divide"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Divide</span></code></a></p></td>
+<td><p>Output first input divided by second input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Exp.html#cdl_python.CDL.Reals.Exp" title="cdl_python.CDL.Reals.Exp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Exp</span></code></a></p></td>
+<td><p>Output the exponential (base e) of the input.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Greater.html#cdl_python.CDL.Reals.Greater" title="cdl_python.CDL.Reals.Greater"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Greater</span></code></a></p></td>
+<td><p>Output y is true if input u1 is greater than input u2 with hysteresis.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.GreaterThreshold.html#cdl_python.CDL.Reals.GreaterThreshold" title="cdl_python.CDL.Reals.GreaterThreshold"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GreaterThreshold</span></code></a></p></td>
+<td><p>Output y is true if input u is greater than threshold with hysteresis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Hysteresis.html#cdl_python.CDL.Reals.Hysteresis" title="cdl_python.CDL.Reals.Hysteresis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Hysteresis</span></code></a></p></td>
+<td><p>Hysteresis block</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.IntegratorWithReset.html#cdl_python.CDL.Reals.IntegratorWithReset" title="cdl_python.CDL.Reals.IntegratorWithReset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntegratorWithReset</span></code></a></p></td>
+<td><p>Output the integral of the input signal with reset capability.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Less.html#cdl_python.CDL.Reals.Less" title="cdl_python.CDL.Reals.Less"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Less</span></code></a></p></td>
+<td><p>Output y is true if input u1 is less than input u2 with hysteresis.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.LessThreshold.html#cdl_python.CDL.Reals.LessThreshold" title="cdl_python.CDL.Reals.LessThreshold"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LessThreshold</span></code></a></p></td>
+<td><p>Output y is true if input u is less than threshold with hysteresis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.LimitSlewRate.html#cdl_python.CDL.Reals.LimitSlewRate" title="cdl_python.CDL.Reals.LimitSlewRate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LimitSlewRate</span></code></a></p></td>
+<td><p>Limit the rate of change of a signal</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Limiter.html#cdl_python.CDL.Reals.Limiter" title="cdl_python.CDL.Reals.Limiter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Limiter</span></code></a></p></td>
+<td><p>Limit the range of a signal.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Line.html#cdl_python.CDL.Reals.Line" title="cdl_python.CDL.Reals.Line"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Line</span></code></a></p></td>
+<td><p>Line interpolation block</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Log.html#cdl_python.CDL.Reals.Log" title="cdl_python.CDL.Reals.Log"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Log</span></code></a></p></td>
+<td><p>Output the natural logarithm of the input.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Log10.html#cdl_python.CDL.Reals.Log10" title="cdl_python.CDL.Reals.Log10"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Log10</span></code></a></p></td>
+<td><p>Output the base 10 logarithm of the input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.MatrixGain.html#cdl_python.CDL.Reals.MatrixGain" title="cdl_python.CDL.Reals.MatrixGain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatrixGain</span></code></a></p></td>
+<td><p>Matrix gain block</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.MatrixMax.html#cdl_python.CDL.Reals.MatrixMax" title="cdl_python.CDL.Reals.MatrixMax"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatrixMax</span></code></a></p></td>
+<td><p>Matrix maximum block</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.MatrixMin.html#cdl_python.CDL.Reals.MatrixMin" title="cdl_python.CDL.Reals.MatrixMin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatrixMin</span></code></a></p></td>
+<td><p>Matrix minimum block</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Max.html#cdl_python.CDL.Reals.Max" title="cdl_python.CDL.Reals.Max"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Max</span></code></a></p></td>
+<td><p>Pass through the largest signal.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Min.html#cdl_python.CDL.Reals.Min" title="cdl_python.CDL.Reals.Min"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Min</span></code></a></p></td>
+<td><p>Pass through the smallest signal.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Modulo.html#cdl_python.CDL.Reals.Modulo" title="cdl_python.CDL.Reals.Modulo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Modulo</span></code></a></p></td>
+<td><p>Output the remainder of first input divided by second input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.MovingAverage.html#cdl_python.CDL.Reals.MovingAverage" title="cdl_python.CDL.Reals.MovingAverage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MovingAverage</span></code></a></p></td>
+<td><p>Compute moving average over a time window</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.MultiMax.html#cdl_python.CDL.Reals.MultiMax" title="cdl_python.CDL.Reals.MultiMax"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiMax</span></code></a></p></td>
+<td><p>Output the maximum element of the input vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.MultiMin.html#cdl_python.CDL.Reals.MultiMin" title="cdl_python.CDL.Reals.MultiMin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiMin</span></code></a></p></td>
+<td><p>Output the minimum element of the input vector.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.MultiSum.html#cdl_python.CDL.Reals.MultiSum" title="cdl_python.CDL.Reals.MultiSum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiSum</span></code></a></p></td>
+<td><p>Sum of Reals, y = k[1]*u[1] + k[2]*u[2] + .</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Multiply.html#cdl_python.CDL.Reals.Multiply" title="cdl_python.CDL.Reals.Multiply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Multiply</span></code></a></p></td>
+<td><p>Output product of two inputs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.MultiplyByParameter.html#cdl_python.CDL.Reals.MultiplyByParameter" title="cdl_python.CDL.Reals.MultiplyByParameter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiplyByParameter</span></code></a></p></td>
+<td><p>Output the product of a gain value with the input signal.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.PID.html#cdl_python.CDL.Reals.PID" title="cdl_python.CDL.Reals.PID"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PID</span></code></a></p></td>
+<td><p>P, PI, PD, and PID controller.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Round.html#cdl_python.CDL.Reals.Round" title="cdl_python.CDL.Reals.Round"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Round</span></code></a></p></td>
+<td><p>Round real number to given digits.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Sin.html#cdl_python.CDL.Reals.Sin" title="cdl_python.CDL.Reals.Sin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sin</span></code></a></p></td>
+<td><p>Output the sine of the input.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Sort.html#cdl_python.CDL.Reals.Sort" title="cdl_python.CDL.Reals.Sort"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sort</span></code></a></p></td>
+<td><p>Sort block</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Sources.html#module-cdl_python.CDL.Reals.Sources" title="cdl_python.CDL.Reals.Sources"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sources</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Sqrt.html#cdl_python.CDL.Reals.Sqrt" title="cdl_python.CDL.Reals.Sqrt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sqrt</span></code></a></p></td>
+<td><p>Output the square root of the input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Subtract.html#cdl_python.CDL.Reals.Subtract" title="cdl_python.CDL.Reals.Subtract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Subtract</span></code></a></p></td>
+<td><p>Output the difference of two inputs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Switch.html#cdl_python.CDL.Reals.Switch" title="cdl_python.CDL.Reals.Switch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Switch</span></code></a></p></td>
+<td><p>Switch between two Real signals.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cdl_python.CDL.Reals.Tan.html#cdl_python.CDL.Reals.Tan" title="cdl_python.CDL.Reals.Tan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Tan</span></code></a></p></td>
+<td><p>Output the tangent of the input.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cdl_python.time_manager.html" class="btn btn-neutral float-left" title="cdl_python.time_manager" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cdl_python.CDL.Reals.Abs.html" class="btn btn-neutral float-right" title="cdl_python.CDL.Reals.Abs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, CDL Python Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

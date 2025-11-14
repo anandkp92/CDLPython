@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Control System Examples &mdash; CDL Python 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Time Table Examples" href="time_tables.html" />
+    <link rel="prev" title="Source Block Examples" href="sources.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CDL Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#virtual-environment-setup-recommended">Virtual Environment Setup (Recommended)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#basic-installation">Basic Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#documentation-installation">Documentation Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#complete-installation-development-docs">Complete Installation (Development + Docs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#verify-installation">Verify Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#requirements-files">Requirements Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#basic-concepts">Basic Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#your-first-cdl-block">Your First CDL Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#using-time-dependent-blocks">Using Time-Dependent Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#building-a-simple-controller">Building a Simple Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#using-pulse-generators">Using Pulse Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#using-time-tables">Using Time Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#translating-cxf-to-python">Translating CXF to Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/cdl_python.html">cdl_python package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/cdl_python.html#core-modules">Core Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/generated/cdl_python.base.html">cdl_python.base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/generated/cdl_python.time_manager.html">cdl_python.time_manager</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/cdl_python.html#cdl-blocks">CDL Blocks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/cdl_python.html#reals-package">Reals Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/cdl_python.html#integers-package">Integers Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/cdl_python.html#logical-package">Logical Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/cdl_python.html#conversions-package">Conversions Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/cdl_python.html#discrete-package">Discrete Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/cdl_python.html#routing-package">Routing Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/cdl_python.html#utilities-package">Utilities Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/cdl_python.html#psychrometrics-package">Psychrometrics Package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/cdl_python.html#module-reference">Module Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/cdl_python.html#module-cdl_python.base">base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/cdl_python.html#module-cdl_python.time_manager">time_manager module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/cdl_translator.html">cdl_translator package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/cdl_translator.html#package-overview">Package Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/generated/cdl_translator.html">cdl_translator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/cdl_translator.html#modules">Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/cdl_translator.html#parser-module">parser module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/cdl_translator.html#translator-module">translator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/cdl_translator.html#cli-module">cli module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/cdl_translator.html#key-classes">Key Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/cdl_translator.html#cxfparser">CXFParser</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/cdl_translator.html#cdlmodel">CDLModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/cdl_translator.html#blockinstance">BlockInstance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/cdl_translator.html#connection">Connection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/cdl_translator.html#pythontranslator">PythonTranslator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/cdl_translator.html#usage-example">Usage Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/cdl_translator.html#command-line-usage">Command-Line Usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sources.html">Source Block Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sources.html#real-valued-sources">Real-Valued Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sources.html#constant-source">Constant Source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sources.html#sine-wave-generator">Sine Wave Generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sources.html#pulse-generator">Pulse Generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sources.html#ramp-generator">Ramp Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sources.html#integer-sources">Integer Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sources.html#integer-constant">Integer Constant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sources.html#integer-pulse">Integer Pulse</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sources.html#boolean-sources">Boolean Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sources.html#boolean-constant">Boolean Constant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sources.html#boolean-pulse">Boolean Pulse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sources.html#sample-trigger">Sample Trigger</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sources.html#calendar-time">Calendar Time</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Control System Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#proportional-controller">Proportional Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pid-controller-example">PID Controller Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#on-off-controller-with-hysteresis">On/Off Controller with Hysteresis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limiter-with-proportional-controller">Limiter with Proportional Controller</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="time_tables.html">Time Table Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="time_tables.html#daily-temperature-schedule">Daily Temperature Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time_tables.html#weekly-occupancy-schedule">Weekly Occupancy Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time_tables.html#multi-column-time-table">Multi-Column Time Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time_tables.html#constant-segments-step-changes">Constant Segments (Step Changes)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cxf_translation.html">CXF Translation Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cxf_translation.html#basic-translation">Basic Translation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cxf_translation.html#using-the-python-api">Using the Python API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cxf_translation.html#using-the-command-line-interface">Using the Command-Line Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cxf_translation.html#example-cxf-file">Example CXF File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cxf_translation.html#generated-python-code">Generated Python Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cxf_translation.html#using-generated-code">Using Generated Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cxf_translation.html#inspecting-parsed-models">Inspecting Parsed Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cxf_translation.html#batch-translation">Batch Translation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#basic-examples">Basic Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#source-blocks">Source Blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#control-systems">Control Systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#time-tables-and-scheduling">Time Tables and Scheduling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#cxf-translation">CXF Translation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Additional Information:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-1-0-current">Version 0.1.0 (Current)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#features">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#known-issues">Known Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#upcoming-features">Upcoming Features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#development-workflow">Development Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#running-tests">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#adding-a-new-cdl-block">Adding a New CDL Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#submitting-changes">Submitting Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#pull-request-guidelines">Pull Request Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#reporting-issues">Reporting Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#questions">Questions?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../license.html#mit-license">MIT License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../license.html#third-party-licenses">Third-Party Licenses</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CDL Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Examples</a></li>
+      <li class="breadcrumb-item active">Control System Examples</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/examples/control_systems.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="control-system-examples">
+<h1>Control System Examples<a class="headerlink" href="#control-system-examples" title="Link to this heading"></a></h1>
+<p>This page demonstrates building complete control systems using CDL Python.</p>
+<section id="proportional-controller">
+<h2>Proportional Controller<a class="headerlink" href="#proportional-controller" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cdl_python.time_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">TimeManager</span><span class="p">,</span> <span class="n">ExecutionMode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cdl_python.CDL.Reals.Math</span><span class="w"> </span><span class="kn">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Gain</span><span class="p">,</span> <span class="n">MultiplyByParameter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cdl_python.CDL.Reals.Sources</span><span class="w"> </span><span class="kn">import</span> <span class="n">Constant</span>
+
+<span class="c1"># Create time manager</span>
+<span class="n">tm</span> <span class="o">=</span> <span class="n">TimeManager</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">ExecutionMode</span><span class="o">.</span><span class="n">SIMULATION</span><span class="p">,</span> <span class="n">time_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="c1"># Components</span>
+<span class="n">setpoint</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mf">22.0</span><span class="p">)</span>  <span class="c1"># 22°C setpoint</span>
+<span class="n">sensor</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mf">20.0</span><span class="p">)</span>    <span class="c1"># Current temperature</span>
+
+<span class="c1"># Calculate error</span>
+<span class="n">error_calc</span> <span class="o">=</span> <span class="n">Add</span><span class="p">()</span>
+
+<span class="c1"># P controller with gain = 5.0</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">Gain</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+
+<span class="c1"># Compute</span>
+<span class="n">sp</span> <span class="o">=</span> <span class="n">setpoint</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">sensor</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+
+<span class="c1"># Error = setpoint - measurement</span>
+<span class="n">error</span> <span class="o">=</span> <span class="n">error_calc</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">u1</span><span class="o">=</span><span class="n">sp</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">u2</span><span class="o">=-</span><span class="n">temp</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+
+<span class="c1"># Control output</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">error</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Setpoint: </span><span class="si">{</span><span class="n">sp</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature: </span><span class="si">{</span><span class="n">temp</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">error</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Control output: </span><span class="si">{</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="pid-controller-example">
+<h2>PID Controller Example<a class="headerlink" href="#pid-controller-example" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cdl_python.time_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">TimeManager</span><span class="p">,</span> <span class="n">ExecutionMode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cdl_python.CDL.Reals.PIDController</span><span class="w"> </span><span class="kn">import</span> <span class="n">PID</span>
+
+<span class="n">tm</span> <span class="o">=</span> <span class="n">TimeManager</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">ExecutionMode</span><span class="o">.</span><span class="n">SIMULATION</span><span class="p">,</span> <span class="n">time_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="c1"># PID controller</span>
+<span class="n">pid</span> <span class="o">=</span> <span class="n">PID</span><span class="p">(</span>
+    <span class="n">time_manager</span><span class="o">=</span><span class="n">tm</span><span class="p">,</span>
+    <span class="n">k</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>      <span class="c1"># Proportional gain</span>
+    <span class="n">Ti</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>    <span class="c1"># Integral time</span>
+    <span class="n">Td</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>     <span class="c1"># Derivative time</span>
+    <span class="n">yMax</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="c1"># Max output</span>
+    <span class="n">yMin</span><span class="o">=</span><span class="mf">0.0</span>    <span class="c1"># Min output</span>
+<span class="p">)</span>
+
+<span class="n">setpoint</span> <span class="o">=</span> <span class="mf">22.0</span>
+<span class="n">measured</span> <span class="o">=</span> <span class="mf">18.0</span>
+
+<span class="c1"># Simulate control loop</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="c1"># Compute control output</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">pid</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span>
+        <span class="n">u_s</span><span class="o">=</span><span class="n">setpoint</span><span class="p">,</span>
+        <span class="n">u_m</span><span class="o">=</span><span class="n">measured</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;t=</span><span class="si">{</span><span class="n">tm</span><span class="o">.</span><span class="n">get_time</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">s: output=</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Simulate process (simplified)</span>
+    <span class="n">measured</span> <span class="o">+=</span> <span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">measured</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.01</span>
+
+    <span class="n">tm</span><span class="o">.</span><span class="n">advance</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="on-off-controller-with-hysteresis">
+<h2>On/Off Controller with Hysteresis<a class="headerlink" href="#on-off-controller-with-hysteresis" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cdl_python.CDL.Logical</span><span class="w"> </span><span class="kn">import</span> <span class="n">OnOffController</span>
+
+<span class="c1"># Hysteresis controller</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">OnOffController</span><span class="p">(</span>
+    <span class="n">bandwidth</span><span class="o">=</span><span class="mf">2.0</span>  <span class="c1"># ±1°C around setpoint</span>
+<span class="p">)</span>
+
+<span class="n">setpoint</span> <span class="o">=</span> <span class="mf">20.0</span>
+<span class="n">temps</span> <span class="o">=</span> <span class="p">[</span><span class="mf">18.0</span><span class="p">,</span> <span class="mf">19.5</span><span class="p">,</span> <span class="mf">20.5</span><span class="p">,</span> <span class="mf">21.5</span><span class="p">,</span> <span class="mf">20.5</span><span class="p">,</span> <span class="mf">19.0</span><span class="p">,</span> <span class="mf">18.5</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">temps</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span>
+        <span class="n">reference</span><span class="o">=</span><span class="n">setpoint</span><span class="p">,</span>
+        <span class="n">u</span><span class="o">=</span><span class="n">temp</span>
+    <span class="p">)</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="s2">&quot;ON&quot;</span> <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;OFF&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temp: </span><span class="si">{</span><span class="n">temp</span><span class="si">}</span><span class="s2">°C, Heater: </span><span class="si">{</span><span class="n">state</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="limiter-with-proportional-controller">
+<h2>Limiter with Proportional Controller<a class="headerlink" href="#limiter-with-proportional-controller" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cdl_python.CDL.Reals.Math</span><span class="w"> </span><span class="kn">import</span> <span class="n">Gain</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cdl_python.CDL.Reals.Limiter</span><span class="w"> </span><span class="kn">import</span> <span class="n">Limit</span>
+
+<span class="c1"># Proportional controller</span>
+<span class="n">gain</span> <span class="o">=</span> <span class="n">Gain</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+
+<span class="c1"># Output limiter (0-100%)</span>
+<span class="n">limiter</span> <span class="o">=</span> <span class="n">Limit</span><span class="p">(</span><span class="n">uMin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">uMax</span><span class="o">=</span><span class="mf">100.0</span><span class="p">)</span>
+
+<span class="c1"># Large error</span>
+<span class="n">error</span> <span class="o">=</span> <span class="mf">15.0</span>
+
+<span class="c1"># Calculate control signal</span>
+<span class="n">control</span> <span class="o">=</span> <span class="n">gain</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">error</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unlimited output: </span><span class="si">{</span><span class="n">control</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># 150.0</span>
+
+<span class="c1"># Apply limits</span>
+<span class="n">limited</span> <span class="o">=</span> <span class="n">limiter</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">control</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Limited output: </span><span class="si">{</span><span class="n">limited</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>    <span class="c1"># 100.0</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sources.html" class="btn btn-neutral float-left" title="Source Block Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="time_tables.html" class="btn btn-neutral float-right" title="Time Table Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, CDL Python Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

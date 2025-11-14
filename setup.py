@@ -36,12 +36,17 @@ setup(
     ],
     python_requires=">=3.8",
     install_requires=[
-        # No external dependencies for core library
+        "numpy>=1.20.0",
     ],
     extras_require={
         "dev": [
             "pytest>=7.0",
             "pytest-cov>=3.0",
+        ],
+        "docs": [
+            "sphinx>=5.0",
+            "sphinx-rtd-theme>=1.0",
+            "sphinx-autodoc-typehints>=1.19",
         ],
     },
 )

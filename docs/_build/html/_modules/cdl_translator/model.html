@@ -1,0 +1,674 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cdl_translator.model &mdash; CDL Python 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            CDL Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#virtual-environment-setup-recommended">Virtual Environment Setup (Recommended)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#basic-installation">Basic Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#documentation-installation">Documentation Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#complete-installation-development-docs">Complete Installation (Development + Docs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#verify-installation">Verify Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#requirements-files">Requirements Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#basic-concepts">Basic Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#your-first-cdl-block">Your First CDL Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#using-time-dependent-blocks">Using Time-Dependent Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#building-a-simple-controller">Building a Simple Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#using-pulse-generators">Using Pulse Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#using-time-tables">Using Time Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#translating-cxf-to-python">Translating CXF to Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/cdl_python.html">cdl_python package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/cdl_python.html#core-modules">Core Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/generated/cdl_python.base.html">cdl_python.base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/generated/cdl_python.time_manager.html">cdl_python.time_manager</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/cdl_python.html#cdl-blocks">CDL Blocks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_python.html#reals-package">Reals Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_python.html#integers-package">Integers Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_python.html#logical-package">Logical Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_python.html#conversions-package">Conversions Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_python.html#discrete-package">Discrete Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_python.html#routing-package">Routing Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_python.html#utilities-package">Utilities Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_python.html#psychrometrics-package">Psychrometrics Package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/cdl_python.html#module-reference">Module Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_python.html#module-cdl_python.base">base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_python.html#module-cdl_python.time_manager">time_manager module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/cdl_translator.html">cdl_translator package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/cdl_translator.html#package-overview">Package Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/generated/cdl_translator.html">cdl_translator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/cdl_translator.html#modules">Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_translator.html#parser-module">parser module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_translator.html#translator-module">translator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_translator.html#cli-module">cli module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/cdl_translator.html#key-classes">Key Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_translator.html#cxfparser">CXFParser</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_translator.html#cdlmodel">CDLModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_translator.html#blockinstance">BlockInstance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_translator.html#connection">Connection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_translator.html#pythontranslator">PythonTranslator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/cdl_translator.html#usage-example">Usage Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/cdl_translator.html#command-line-usage">Command-Line Usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/sources.html">Source Block Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/sources.html#real-valued-sources">Real-Valued Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#constant-source">Constant Source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#sine-wave-generator">Sine Wave Generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#pulse-generator">Pulse Generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#ramp-generator">Ramp Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/sources.html#integer-sources">Integer Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#integer-constant">Integer Constant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#integer-pulse">Integer Pulse</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/sources.html#boolean-sources">Boolean Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#boolean-constant">Boolean Constant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#boolean-pulse">Boolean Pulse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#sample-trigger">Sample Trigger</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/sources.html#calendar-time">Calendar Time</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/control_systems.html">Control System Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/control_systems.html#proportional-controller">Proportional Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/control_systems.html#pid-controller-example">PID Controller Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/control_systems.html#on-off-controller-with-hysteresis">On/Off Controller with Hysteresis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/control_systems.html#limiter-with-proportional-controller">Limiter with Proportional Controller</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/time_tables.html">Time Table Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/time_tables.html#daily-temperature-schedule">Daily Temperature Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/time_tables.html#weekly-occupancy-schedule">Weekly Occupancy Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/time_tables.html#multi-column-time-table">Multi-Column Time Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/time_tables.html#constant-segments-step-changes">Constant Segments (Step Changes)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/cxf_translation.html">CXF Translation Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/cxf_translation.html#basic-translation">Basic Translation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/cxf_translation.html#using-the-python-api">Using the Python API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/cxf_translation.html#using-the-command-line-interface">Using the Command-Line Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/cxf_translation.html#example-cxf-file">Example CXF File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/cxf_translation.html#generated-python-code">Generated Python Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/cxf_translation.html#using-generated-code">Using Generated Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/cxf_translation.html#inspecting-parsed-models">Inspecting Parsed Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/cxf_translation.html#batch-translation">Batch Translation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html#basic-examples">Basic Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/index.html#source-blocks">Source Blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/index.html#control-systems">Control Systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/index.html#time-tables-and-scheduling">Time Tables and Scheduling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/index.html#cxf-translation">CXF Translation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Additional Information:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#version-0-1-0-current">Version 0.1.0 (Current)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#features">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#known-issues">Known Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#upcoming-features">Upcoming Features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#development-workflow">Development Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#running-tests">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#adding-a-new-cdl-block">Adding a New CDL Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#submitting-changes">Submitting Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#pull-request-guidelines">Pull Request Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#reporting-issues">Reporting Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#questions">Questions?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../license.html#mit-license">MIT License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../license.html#third-party-licenses">Third-Party Licenses</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CDL Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">cdl_translator.model</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for cdl_translator.model</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Internal model representation for CDL models</span>
+
+<span class="sd">This module defines data structures for representing parsed CDL models</span>
+<span class="sd">in a format suitable for Python code generation.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PortType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Type of port (input/output connector)&quot;&quot;&quot;</span>
+    <span class="n">REAL</span> <span class="o">=</span> <span class="s2">&quot;Real&quot;</span>
+    <span class="n">INTEGER</span> <span class="o">=</span> <span class="s2">&quot;Integer&quot;</span>
+    <span class="n">BOOLEAN</span> <span class="o">=</span> <span class="s2">&quot;Boolean&quot;</span>
+
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Parameter</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Model or block parameter</span>
+
+<span class="sd">    Represents a parameter that can be set at instantiation time.</span>
+<span class="sd">    Can be a literal value or reference to parent parameter.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># &#39;Real&#39;, &#39;Integer&#39;, &#39;Boolean&#39;</span>
+    <span class="n">value</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate parameter&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Real&#39;</span><span class="p">,</span> <span class="s1">&#39;Integer&#39;</span><span class="p">,</span> <span class="s1">&#39;Boolean&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid parameter type: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Port</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Input or output port&quot;&quot;&quot;</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="n">PortType</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert string type to PortType if needed&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">PortType</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+
+
+<div class="viewcode-block" id="BlockInstance">
+<a class="viewcode-back" href="../../api/cdl_translator.html#cdl_translator.parser.BlockInstance">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BlockInstance</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Instance of a CDL block</span>
+
+<span class="sd">    Represents a single block instantiation within a model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">instance_name</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># e.g., &quot;gain&quot;, &quot;adder&quot;</span>
+    <span class="n">block_type</span><span class="p">:</span> <span class="nb">str</span>     <span class="c1"># e.g., &quot;Buildings.Controls.OBC.CDL.Reals.Add&quot;</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+
+    <span class="c1"># CDL packages that have blocks requiring TimeManager</span>
+    <span class="n">STATEFUL_PACKAGES</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;Reals&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;Derivative&#39;</span><span class="p">,</span> <span class="s1">&#39;IntegratorWithReset&#39;</span><span class="p">,</span> <span class="s1">&#39;Integrator&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;LimitSlewRate&#39;</span><span class="p">,</span> <span class="s1">&#39;MovingAverage&#39;</span><span class="p">,</span> <span class="s1">&#39;PID&#39;</span><span class="p">,</span> <span class="s1">&#39;PIDWithReset&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;LimPID&#39;</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;Logical&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;FallingEdge&#39;</span><span class="p">,</span> <span class="s1">&#39;RisingEdge&#39;</span><span class="p">,</span> <span class="s1">&#39;Timer&#39;</span><span class="p">,</span> <span class="s1">&#39;TrueDelay&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;TrueFalseHold&#39;</span><span class="p">,</span> <span class="s1">&#39;TrueHoldWithReset&#39;</span><span class="p">,</span> <span class="s1">&#39;OnCounter&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Proof&#39;</span><span class="p">,</span> <span class="s1">&#39;VariablePulse&#39;</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;Discrete&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;Sampler&#39;</span><span class="p">,</span> <span class="s1">&#39;FirstOrderHold&#39;</span><span class="p">,</span> <span class="s1">&#39;ZeroOrderHold&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;UnitDelay&#39;</span><span class="p">,</span> <span class="s1">&#39;TriggeredMax&#39;</span><span class="p">,</span> <span class="s1">&#39;TriggeredMovingMean&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;TriggeredSampler&#39;</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;Utilities&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;SunRiseSet&#39;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<div class="viewcode-block" id="BlockInstance.is_standard_cdl_block">
+<a class="viewcode-back" href="../../api/cdl_translator.html#cdl_translator.parser.BlockInstance.is_standard_cdl_block">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_standard_cdl_block</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if this is a standard CDL library block</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if block type contains &#39;CDL&#39; (standard library block)</span>
+<span class="sd">            False otherwise (custom/user-defined block)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;CDL&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">block_type</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BlockInstance.is_custom_block">
+<a class="viewcode-back" href="../../api/cdl_translator.html#cdl_translator.parser.BlockInstance.is_custom_block">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_custom_block</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if this is a custom/user-defined block</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if not a standard CDL block</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_standard_cdl_block</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="BlockInstance.get_custom_block_name">
+<a class="viewcode-back" href="../../api/cdl_translator.html#cdl_translator.parser.BlockInstance.get_custom_block_name">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_custom_block_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract the simple name from a custom block type</span>
+
+<span class="sd">        For custom blocks like:</span>
+<span class="sd">          - &quot;ex:SubController&quot; -&gt; &quot;SubController&quot;</span>
+<span class="sd">          - &quot;http://example.org#FromModelica.SubController&quot; -&gt; &quot;SubController&quot;</span>
+<span class="sd">          - &quot;MyPackage.MyBlock&quot; -&gt; &quot;MyBlock&quot;</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Simple block name without namespace or path</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">block_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">block_type</span>
+
+        <span class="c1"># Strip namespace prefix (e.g., &quot;ex:&quot;)</span>
+        <span class="k">if</span> <span class="s1">&#39;:&#39;</span> <span class="ow">in</span> <span class="n">block_type</span><span class="p">:</span>
+            <span class="n">block_type</span> <span class="o">=</span> <span class="n">block_type</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Extract after # for URIs</span>
+        <span class="k">if</span> <span class="s1">&#39;#&#39;</span> <span class="ow">in</span> <span class="n">block_type</span><span class="p">:</span>
+            <span class="n">block_type</span> <span class="o">=</span> <span class="n">block_type</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Get last part after dots</span>
+        <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">block_type</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">block_type</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">block_type</span></div>
+
+
+<div class="viewcode-block" id="BlockInstance.get_python_import_path">
+<a class="viewcode-back" href="../../api/cdl_translator.html#cdl_translator.parser.BlockInstance.get_python_import_path">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_python_import_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert CDL path to Python import path</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple of (module_path, class_name)</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &quot;Buildings.Controls.OBC.CDL.Reals.Add&quot;</span>
+<span class="sd">            -&gt; (&quot;cdl_python.CDL.Reals&quot;, &quot;Add&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">block_type</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Find CDL in the path</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cdl_idx</span> <span class="o">=</span> <span class="n">parts</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;CDL&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid CDL block type: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">block_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Extract package and class name</span>
+        <span class="n">package_parts</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="n">cdl_idx</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Between CDL and class name</span>
+        <span class="n">class_name</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Build Python import path</span>
+        <span class="n">module_path</span> <span class="o">=</span> <span class="s2">&quot;cdl_python.CDL.&quot;</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">package_parts</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">module_path</span><span class="p">,</span> <span class="n">class_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BlockInstance.needs_time_manager">
+<a class="viewcode-back" href="../../api/cdl_translator.html#cdl_translator.parser.BlockInstance.needs_time_manager">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">needs_time_manager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if this block requires a TimeManager</span>
+
+<span class="sd">        Stateful blocks (integrators, PIDs, timers, delays, etc.)</span>
+<span class="sd">        require a TimeManager for time-dependent operations.</span>
+
+<span class="sd">        Custom blocks are assumed to handle their own time management internally.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Custom blocks don&#39;t require time manager from parent</span>
+        <span class="c1"># (they manage their own if needed)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_custom_block</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="n">_</span><span class="p">,</span> <span class="n">class_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_python_import_path</span><span class="p">()</span>
+        <span class="n">module_path</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_python_import_path</span><span class="p">()</span>
+
+        <span class="c1"># Extract package name (e.g., &quot;Reals&quot; from &quot;cdl_python.CDL.Reals&quot;)</span>
+        <span class="n">package</span> <span class="o">=</span> <span class="n">module_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">package</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">STATEFUL_PACKAGES</span> <span class="ow">and</span> \
+               <span class="n">class_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">STATEFUL_PACKAGES</span><span class="p">[</span><span class="n">package</span><span class="p">]</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Connection">
+<a class="viewcode-back" href="../../api/cdl_translator.html#cdl_translator.parser.Connection">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Connection</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Connection between ports</span>
+
+<span class="sd">    Represents data flow from source to target.</span>
+<span class="sd">    Can connect:</span>
+<span class="sd">    - Model input -&gt; block input</span>
+<span class="sd">    - Block output -&gt; block input</span>
+<span class="sd">    - Block output -&gt; model output</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">source_block</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># Instance name or None for model input</span>
+    <span class="n">source_port</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">target_block</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># Instance name or None for model output</span>
+    <span class="n">target_port</span><span class="p">:</span> <span class="nb">str</span>
+
+<div class="viewcode-block" id="Connection.is_from_input">
+<a class="viewcode-back" href="../../api/cdl_translator.html#cdl_translator.parser.Connection.is_from_input">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_from_input</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if connection is from model input&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_block</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_block</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="Connection.is_to_output">
+<a class="viewcode-back" href="../../api/cdl_translator.html#cdl_translator.parser.Connection.is_to_output">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_to_output</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if connection is to model output&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_block</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_block</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="Connection.__str__">
+<a class="viewcode-back" href="../../api/cdl_translator.html#cdl_translator.parser.Connection.__str__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Human-readable representation&quot;&quot;&quot;</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_port</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_from_input</span><span class="p">()</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">source_block</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">source_port</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_port</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_to_output</span><span class="p">()</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">target_block</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">target_port</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">&quot;</span></div>
+</div>
+
+
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ModelMetadata</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Model-level metadata&quot;&quot;&quot;</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Parameter</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Port</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Port</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="CDLModel">
+<a class="viewcode-back" href="../../api/cdl_translator.html#cdl_translator.parser.CDLModel">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CDLModel</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Complete CDL model representation</span>
+
+<span class="sd">    Contains all information needed to generate Python code.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">metadata</span><span class="p">:</span> <span class="n">ModelMetadata</span>
+    <span class="n">instances</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">BlockInstance</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">connections</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Connection</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CDLModel.get_required_imports">
+<a class="viewcode-back" href="../../api/cdl_translator.html#cdl_translator.parser.CDLModel.get_required_imports">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_required_imports</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all CDL imports needed (only standard blocks)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary mapping module paths to set of class names</span>
+<span class="sd">            Example: {</span>
+<span class="sd">                &quot;cdl_python.CDL.Reals&quot;: {&quot;Add&quot;, &quot;MultiplyByParameter&quot;},</span>
+<span class="sd">                &quot;cdl_python.CDL.Logical&quot;: {&quot;And&quot;}</span>
+<span class="sd">            }</span>
+
+<span class="sd">        Note: Custom blocks are not included - they are imported separately</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">imports</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">instances</span><span class="p">:</span>
+            <span class="c1"># Skip custom blocks - they&#39;re handled separately</span>
+            <span class="k">if</span> <span class="n">instance</span><span class="o">.</span><span class="n">is_custom_block</span><span class="p">():</span>
+                <span class="k">continue</span>
+
+            <span class="n">module_path</span><span class="p">,</span> <span class="n">class_name</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">get_python_import_path</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">module_path</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">imports</span><span class="p">:</span>
+                <span class="n">imports</span><span class="p">[</span><span class="n">module_path</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+            <span class="n">imports</span><span class="p">[</span><span class="n">module_path</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">class_name</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">imports</span></div>
+
+
+<div class="viewcode-block" id="CDLModel.needs_time_manager">
+<a class="viewcode-back" href="../../api/cdl_translator.html#cdl_translator.parser.CDLModel.needs_time_manager">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">needs_time_manager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if any block in the model needs TimeManager&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">needs_time_manager</span><span class="p">()</span> <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">instances</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CDLModel.get_computation_order">
+<a class="viewcode-back" href="../../api/cdl_translator.html#cdl_translator.parser.CDLModel.get_computation_order">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_computation_order</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">BlockInstance</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Topological sort of blocks based on connections</span>
+
+<span class="sd">        Returns blocks in order such that all dependencies are</span>
+<span class="sd">        computed before their dependents.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of BlockInstance in computation order</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If circular dependency detected</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Build dependency graph: instance -&gt; set of instances it depends on</span>
+        <span class="n">dependencies</span> <span class="o">=</span> <span class="p">{</span><span class="n">instance</span><span class="o">.</span><span class="n">instance_name</span><span class="p">:</span> <span class="nb">set</span><span class="p">()</span> <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">instances</span><span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">conn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">:</span>
+            <span class="c1"># Skip connections from/to model inputs/outputs</span>
+            <span class="k">if</span> <span class="n">conn</span><span class="o">.</span><span class="n">is_from_input</span><span class="p">()</span> <span class="ow">or</span> <span class="n">conn</span><span class="o">.</span><span class="n">is_to_output</span><span class="p">():</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># target depends on source</span>
+            <span class="k">if</span> <span class="n">conn</span><span class="o">.</span><span class="n">target_block</span> <span class="ow">in</span> <span class="n">dependencies</span><span class="p">:</span>
+                <span class="n">dependencies</span><span class="p">[</span><span class="n">conn</span><span class="o">.</span><span class="n">target_block</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">conn</span><span class="o">.</span><span class="n">source_block</span><span class="p">)</span>
+
+        <span class="c1"># Kahn&#39;s algorithm for topological sort</span>
+        <span class="n">in_degree</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">deps</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">deps</span> <span class="ow">in</span> <span class="n">dependencies</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">queue</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">degree</span> <span class="ow">in</span> <span class="n">in_degree</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">degree</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+            <span class="c1"># Sort for deterministic output</span>
+            <span class="n">queue</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+            <span class="n">current</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+
+            <span class="c1"># Reduce in-degree for dependents</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">deps</span> <span class="ow">in</span> <span class="n">dependencies</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">current</span> <span class="ow">in</span> <span class="n">deps</span><span class="p">:</span>
+                    <span class="n">in_degree</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="n">in_degree</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="c1"># Check for cycles</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instances</span><span class="p">):</span>
+            <span class="n">remaining</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">dependencies</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Circular dependency detected involving: </span><span class="si">{</span><span class="n">remaining</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Return instances in computed order</span>
+        <span class="n">instance_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">inst</span><span class="o">.</span><span class="n">instance_name</span><span class="p">:</span> <span class="n">inst</span> <span class="k">for</span> <span class="n">inst</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">instances</span><span class="p">}</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">instance_map</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">result</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="CDLModel.validate">
+<a class="viewcode-back" href="../../api/cdl_translator.html#cdl_translator.parser.CDLModel.validate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate model consistency</span>
+
+<span class="sd">        Checks:</span>
+<span class="sd">        - All connections reference valid instances/ports</span>
+<span class="sd">        - No circular dependencies</span>
+<span class="sd">        - Parameter types match</span>
+<span class="sd">        - All inputs/outputs are connected</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple of (is_valid, list of error messages)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Build set of valid instance names</span>
+        <span class="n">instance_names</span> <span class="o">=</span> <span class="p">{</span><span class="n">inst</span><span class="o">.</span><span class="n">instance_name</span> <span class="k">for</span> <span class="n">inst</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">instances</span><span class="p">}</span>
+        <span class="n">input_names</span> <span class="o">=</span> <span class="p">{</span><span class="n">port</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">inputs</span><span class="p">}</span>
+        <span class="n">output_names</span> <span class="o">=</span> <span class="p">{</span><span class="n">port</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">outputs</span><span class="p">}</span>
+
+        <span class="c1"># Validate connections</span>
+        <span class="k">for</span> <span class="n">conn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">:</span>
+            <span class="c1"># Check source</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">conn</span><span class="o">.</span><span class="n">is_from_input</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">conn</span><span class="o">.</span><span class="n">source_block</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">instance_names</span><span class="p">:</span>
+                    <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connection references unknown source block: </span><span class="si">{</span><span class="n">conn</span><span class="o">.</span><span class="n">source_block</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">conn</span><span class="o">.</span><span class="n">source_port</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">input_names</span><span class="p">:</span>
+                    <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connection references unknown input: </span><span class="si">{</span><span class="n">conn</span><span class="o">.</span><span class="n">source_port</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Check target</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">conn</span><span class="o">.</span><span class="n">is_to_output</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">conn</span><span class="o">.</span><span class="n">target_block</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">instance_names</span><span class="p">:</span>
+                    <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connection references unknown target block: </span><span class="si">{</span><span class="n">conn</span><span class="o">.</span><span class="n">target_block</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">conn</span><span class="o">.</span><span class="n">target_port</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">output_names</span><span class="p">:</span>
+                    <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connection references unknown output: </span><span class="si">{</span><span class="n">conn</span><span class="o">.</span><span class="n">target_port</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Check for circular dependencies</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_computation_order</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">errors</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CDLModel.get_instance">
+<a class="viewcode-back" href="../../api/cdl_translator.html#cdl_translator.parser.CDLModel.get_instance">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BlockInstance</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get block instance by name&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">instances</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">instance</span><span class="o">.</span><span class="n">instance_name</span> <span class="o">==</span> <span class="n">name</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">instance</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, CDL Python Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
