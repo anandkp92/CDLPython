@@ -1,0 +1,675 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cdl_python package &mdash; CDL Python 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cdl_python.base" href="generated/cdl_python.base.html" />
+    <link rel="prev" title="API Reference" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CDL Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#virtual-environment-setup-recommended">Virtual Environment Setup (Recommended)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#basic-installation">Basic Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#documentation-installation">Documentation Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#complete-installation-development-docs">Complete Installation (Development + Docs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#verify-installation">Verify Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#requirements-files">Requirements Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#basic-concepts">Basic Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#your-first-cdl-block">Your First CDL Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#using-time-dependent-blocks">Using Time-Dependent Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#building-a-simple-controller">Building a Simple Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#using-pulse-generators">Using Pulse Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#using-time-tables">Using Time Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#translating-cxf-to-python">Translating CXF to Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">cdl_python package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#core-modules">Core Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/cdl_python.base.html">cdl_python.base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/cdl_python.time_manager.html">cdl_python.time_manager</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cdl-blocks">CDL Blocks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#reals-package">Reals Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#integers-package">Integers Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#logical-package">Logical Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conversions-package">Conversions Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#discrete-package">Discrete Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routing-package">Routing Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#utilities-package">Utilities Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#psychrometrics-package">Psychrometrics Package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-reference">Module Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#module-cdl_python.base">base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-cdl_python.time_manager">time_manager module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cdl_translator.html">cdl_translator package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cdl_translator.html#package-overview">Package Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/cdl_translator.html">cdl_translator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cdl_translator.html#modules">Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cdl_translator.html#parser-module">parser module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cdl_translator.html#translator-module">translator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cdl_translator.html#cli-module">cli module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cdl_translator.html#key-classes">Key Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cdl_translator.html#cxfparser">CXFParser</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cdl_translator.html#cdlmodel">CDLModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cdl_translator.html#blockinstance">BlockInstance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cdl_translator.html#connection">Connection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cdl_translator.html#pythontranslator">PythonTranslator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cdl_translator.html#usage-example">Usage Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cdl_translator.html#command-line-usage">Command-Line Usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/sources.html">Source Block Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/sources.html#real-valued-sources">Real-Valued Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/sources.html#constant-source">Constant Source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/sources.html#sine-wave-generator">Sine Wave Generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/sources.html#pulse-generator">Pulse Generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/sources.html#ramp-generator">Ramp Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/sources.html#integer-sources">Integer Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/sources.html#integer-constant">Integer Constant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/sources.html#integer-pulse">Integer Pulse</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/sources.html#boolean-sources">Boolean Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/sources.html#boolean-constant">Boolean Constant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/sources.html#boolean-pulse">Boolean Pulse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/sources.html#sample-trigger">Sample Trigger</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/sources.html#calendar-time">Calendar Time</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/control_systems.html">Control System Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/control_systems.html#proportional-controller">Proportional Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/control_systems.html#pid-controller-example">PID Controller Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/control_systems.html#on-off-controller-with-hysteresis">On/Off Controller with Hysteresis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/control_systems.html#limiter-with-proportional-controller">Limiter with Proportional Controller</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/time_tables.html">Time Table Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/time_tables.html#daily-temperature-schedule">Daily Temperature Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/time_tables.html#weekly-occupancy-schedule">Weekly Occupancy Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/time_tables.html#multi-column-time-table">Multi-Column Time Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/time_tables.html#constant-segments-step-changes">Constant Segments (Step Changes)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/cxf_translation.html">CXF Translation Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/cxf_translation.html#basic-translation">Basic Translation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/cxf_translation.html#using-the-python-api">Using the Python API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/cxf_translation.html#using-the-command-line-interface">Using the Command-Line Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/cxf_translation.html#example-cxf-file">Example CXF File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/cxf_translation.html#generated-python-code">Generated Python Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/cxf_translation.html#using-generated-code">Using Generated Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/cxf_translation.html#inspecting-parsed-models">Inspecting Parsed Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/cxf_translation.html#batch-translation">Batch Translation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/index.html#basic-examples">Basic Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/index.html#source-blocks">Source Blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/index.html#control-systems">Control Systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/index.html#time-tables-and-scheduling">Time Tables and Scheduling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/index.html#cxf-translation">CXF Translation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Additional Information:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-1-0-current">Version 0.1.0 (Current)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#features">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#known-issues">Known Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#upcoming-features">Upcoming Features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#development-workflow">Development Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#running-tests">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#adding-a-new-cdl-block">Adding a New CDL Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#submitting-changes">Submitting Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#pull-request-guidelines">Pull Request Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#reporting-issues">Reporting Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#questions">Questions?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../license.html#mit-license">MIT License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../license.html#third-party-licenses">Third-Party Licenses</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CDL Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API Reference</a></li>
+      <li class="breadcrumb-item active">cdl_python package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/cdl_python.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cdl-python-package">
+<h1>cdl_python package<a class="headerlink" href="#cdl-python-package" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">cdl_python</span></code> package provides Python implementations of CDL (Control Description Language) blocks
+for building automation and control systems.</p>
+<section id="core-modules">
+<h2>Core Modules<a class="headerlink" href="#core-modules" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/cdl_python.base.html#module-cdl_python.base" title="cdl_python.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.base</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/cdl_python.time_manager.html#module-cdl_python.time_manager" title="cdl_python.time_manager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.time_manager</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cdl-blocks">
+<h2>CDL Blocks<a class="headerlink" href="#cdl-blocks" title="Link to this heading"></a></h2>
+<section id="reals-package">
+<h3>Reals Package<a class="headerlink" href="#reals-package" title="Link to this heading"></a></h3>
+<p>Real-valued signal processing blocks.</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Reals.html#module-cdl_python.CDL.Reals" title="cdl_python.CDL.Reals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Reals</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<section id="reals-sources">
+<h4>Reals.Sources<a class="headerlink" href="#reals-sources" title="Link to this heading"></a></h4>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Reals.Sources.Constant.html#cdl_python.CDL.Reals.Sources.Constant" title="cdl_python.CDL.Reals.Sources.Constant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Reals.Sources.Constant</span></code></a></p></td>
+<td><p>Output constant signal of type Real</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Reals.Sources.Sin.html#cdl_python.CDL.Reals.Sources.Sin" title="cdl_python.CDL.Reals.Sources.Sin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Reals.Sources.Sin</span></code></a></p></td>
+<td><p>Generate sine signal</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Reals.Sources.Pulse.html#cdl_python.CDL.Reals.Sources.Pulse" title="cdl_python.CDL.Reals.Sources.Pulse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Reals.Sources.Pulse</span></code></a></p></td>
+<td><p>Generate pulse signal of type Real</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Reals.Sources.Ramp.html#cdl_python.CDL.Reals.Sources.Ramp" title="cdl_python.CDL.Reals.Sources.Ramp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Reals.Sources.Ramp</span></code></a></p></td>
+<td><p>Generate ramp signal</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Reals.Sources.TimeTable.html#cdl_python.CDL.Reals.Sources.TimeTable" title="cdl_python.CDL.Reals.Sources.TimeTable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Reals.Sources.TimeTable</span></code></a></p></td>
+<td><p>Table look-up with respect to time with interpolation and extrapolation</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Reals.Sources.CalendarTime.html#cdl_python.CDL.Reals.Sources.CalendarTime" title="cdl_python.CDL.Reals.Sources.CalendarTime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Reals.Sources.CalendarTime</span></code></a></p></td>
+<td><p>Computes calendar time from simulation time</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Reals.Sources.CivilTime.html#cdl_python.CDL.Reals.Sources.CivilTime" title="cdl_python.CDL.Reals.Sources.CivilTime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Reals.Sources.CivilTime</span></code></a></p></td>
+<td><p>Civil time block</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="reals-math">
+<h4>Reals.Math<a class="headerlink" href="#reals-math" title="Link to this heading"></a></h4>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+</tbody>
+</table>
+</section>
+<section id="reals-limiter">
+<h4>Reals.Limiter<a class="headerlink" href="#reals-limiter" title="Link to this heading"></a></h4>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Reals.Limiter.html#cdl_python.CDL.Reals.Limiter" title="cdl_python.CDL.Reals.Limiter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Reals.Limiter</span></code></a></p></td>
+<td><p>Limit the range of a signal.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="reals-pidcontroller">
+<h4>Reals.PIDController<a class="headerlink" href="#reals-pidcontroller" title="Link to this heading"></a></h4>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+</tbody>
+</table>
+</section>
+</section>
+<section id="integers-package">
+<h3>Integers Package<a class="headerlink" href="#integers-package" title="Link to this heading"></a></h3>
+<p>Integer signal processing blocks.</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Integers.html#module-cdl_python.CDL.Integers" title="cdl_python.CDL.Integers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Integers</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<section id="integers-sources">
+<h4>Integers.Sources<a class="headerlink" href="#integers-sources" title="Link to this heading"></a></h4>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Integers.Sources.Constant.html#cdl_python.CDL.Integers.Sources.Constant" title="cdl_python.CDL.Integers.Sources.Constant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Integers.Sources.Constant</span></code></a></p></td>
+<td><p>Output constant signal of type Integer</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Integers.Sources.Pulse.html#cdl_python.CDL.Integers.Sources.Pulse" title="cdl_python.CDL.Integers.Sources.Pulse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Integers.Sources.Pulse</span></code></a></p></td>
+<td><p>Generate pulse signal of type Integer</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Integers.Sources.TimeTable.html#cdl_python.CDL.Integers.Sources.TimeTable" title="cdl_python.CDL.Integers.Sources.TimeTable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Integers.Sources.TimeTable</span></code></a></p></td>
+<td><p>Table look-up with respect to time with constant segments</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="integers-math">
+<h4>Integers.Math<a class="headerlink" href="#integers-math" title="Link to this heading"></a></h4>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+</tbody>
+</table>
+</section>
+</section>
+<section id="logical-package">
+<h3>Logical Package<a class="headerlink" href="#logical-package" title="Link to this heading"></a></h3>
+<p>Boolean logic blocks.</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Logical.html#module-cdl_python.CDL.Logical" title="cdl_python.CDL.Logical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Logical</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<section id="logical-sources">
+<h4>Logical.Sources<a class="headerlink" href="#logical-sources" title="Link to this heading"></a></h4>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Logical.Sources.Constant.html#cdl_python.CDL.Logical.Sources.Constant" title="cdl_python.CDL.Logical.Sources.Constant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Logical.Sources.Constant</span></code></a></p></td>
+<td><p>Output constant signal of type Boolean</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Logical.Sources.Pulse.html#cdl_python.CDL.Logical.Sources.Pulse" title="cdl_python.CDL.Logical.Sources.Pulse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Logical.Sources.Pulse</span></code></a></p></td>
+<td><p>Generate pulse signal of type Boolean</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Logical.Sources.SampleTrigger.html#cdl_python.CDL.Logical.Sources.SampleTrigger" title="cdl_python.CDL.Logical.Sources.SampleTrigger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Logical.Sources.SampleTrigger</span></code></a></p></td>
+<td><p>Generate sample trigger signal</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Logical.Sources.TimeTable.html#cdl_python.CDL.Logical.Sources.TimeTable" title="cdl_python.CDL.Logical.Sources.TimeTable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Logical.Sources.TimeTable</span></code></a></p></td>
+<td><p>Table look-up with respect to time with constant segments for Boolean values</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="logical-operations">
+<h4>Logical.Operations<a class="headerlink" href="#logical-operations" title="Link to this heading"></a></h4>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Logical.html#module-cdl_python.CDL.Logical" title="cdl_python.CDL.Logical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Logical</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="conversions-package">
+<h3>Conversions Package<a class="headerlink" href="#conversions-package" title="Link to this heading"></a></h3>
+<p>Type conversion blocks.</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Conversions.html#module-cdl_python.CDL.Conversions" title="cdl_python.CDL.Conversions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Conversions</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="discrete-package">
+<h3>Discrete Package<a class="headerlink" href="#discrete-package" title="Link to this heading"></a></h3>
+<p>Discrete-time signal processing blocks.</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Discrete.html#module-cdl_python.CDL.Discrete" title="cdl_python.CDL.Discrete"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Discrete</span></code></a></p></td>
+<td><p>CDL Discrete Package - Discrete-time sampling and delay blocks</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="routing-package">
+<h3>Routing Package<a class="headerlink" href="#routing-package" title="Link to this heading"></a></h3>
+<p>Signal routing and multiplexing blocks.</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Routing.html#module-cdl_python.CDL.Routing" title="cdl_python.CDL.Routing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Routing</span></code></a></p></td>
+<td><p>CDL Routing Package - Array and vector manipulation blocks</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="utilities-package">
+<h3>Utilities Package<a class="headerlink" href="#utilities-package" title="Link to this heading"></a></h3>
+<p>Utility blocks for assertions and validation.</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Utilities.html#module-cdl_python.CDL.Utilities" title="cdl_python.CDL.Utilities"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Utilities</span></code></a></p></td>
+<td><p>CDL Utilities Package - Utility blocks for control sequences</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="psychrometrics-package">
+<h3>Psychrometrics Package<a class="headerlink" href="#psychrometrics-package" title="Link to this heading"></a></h3>
+<p>Psychrometric calculation blocks.</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/cdl_python.CDL.Psychrometrics.html#module-cdl_python.CDL.Psychrometrics" title="cdl_python.CDL.Psychrometrics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_python.CDL.Psychrometrics</span></code></a></p></td>
+<td><p>CDL Psychrometrics Package - Air property calculations</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="module-reference">
+<h2>Module Reference<a class="headerlink" href="#module-reference" title="Link to this heading"></a></h2>
+<section id="module-cdl_python.base">
+<span id="base-module"></span><h3>base module<a class="headerlink" href="#module-cdl_python.base" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cdl_python.base.CDLBlock">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cdl_python.base.</span></span><span class="sig-name descname"><span class="pre">CDLBlock</span></span><a class="reference internal" href="../_modules/cdl_python/base.html#CDLBlock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_python.base.CDLBlock" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Base class for all CDL elementary blocks.</p>
+<p>Provides:
+- Access to TimeManager for time-dependent blocks
+- State persistence between compute() calls
+- Common interface for all blocks</p>
+<p>Subclasses must implement compute() method.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_python.base.CDLBlock.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_manager</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_python/base.html#CDLBlock.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_python.base.CDLBlock.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize CDL block.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>time_manager</strong> (<a class="reference internal" href="#cdl_python.time_manager.TimeManager" title="cdl_python.time_manager.TimeManager"><em>TimeManager</em></a><em> | </em><em>None</em>) – TimeManager instance (optional, but required for stateful blocks)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_python.base.CDLBlock.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_python/base.html#CDLBlock.compute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_python.base.CDLBlock.compute" title="Link to this definition"></a></dt>
+<dd><p>Compute block outputs from inputs.</p>
+<p>This is the main computation method that subclasses must override.
+Should be pure logic: inputs -&gt; outputs, using self._state for persistence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**inputs</strong> – Named input values (type depends on block)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary of output names to values</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NotImplementedError" title="(in Python v3.14)"><strong>NotImplementedError</strong></a> – Must be implemented by subclass</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><em>Dict</em></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><em>Any</em></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_python.base.CDLBlock.get_time">
+<span class="sig-name descname"><span class="pre">get_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_python/base.html#CDLBlock.get_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_python.base.CDLBlock.get_time" title="Link to this definition"></a></dt>
+<dd><p>Get current time from TimeManager.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Current time in seconds</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.14)"><strong>RuntimeError</strong></a> – If no TimeManager is set</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_python.base.CDLBlock.reset_state">
+<span class="sig-name descname"><span class="pre">reset_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_python/base.html#CDLBlock.reset_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_python.base.CDLBlock.reset_state" title="Link to this definition"></a></dt>
+<dd><p>Reset internal state to initial conditions.</p>
+<p>Subclasses should override if they need custom reset logic.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cdl_python.time_manager">
+<span id="time-manager-module"></span><h3>time_manager module<a class="headerlink" href="#module-cdl_python.time_manager" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cdl_python.time_manager.ExecutionMode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cdl_python.time_manager.</span></span><span class="sig-name descname"><span class="pre">ExecutionMode</span></span><a class="reference internal" href="../_modules/cdl_python/time_manager.html#ExecutionMode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_python.time_manager.ExecutionMode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
+<p>Execution mode for CDL system</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cdl_python.time_manager.ExecutionMode.REALTIME">
+<span class="sig-name descname"><span class="pre">REALTIME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'realtime'</span></em><a class="headerlink" href="#cdl_python.time_manager.ExecutionMode.REALTIME" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cdl_python.time_manager.ExecutionMode.SIMULATION">
+<span class="sig-name descname"><span class="pre">SIMULATION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'simulation'</span></em><a class="headerlink" href="#cdl_python.time_manager.ExecutionMode.SIMULATION" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cdl_python.time_manager.TimeManager">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cdl_python.time_manager.</span></span><span class="sig-name descname"><span class="pre">TimeManager</span></span><a class="reference internal" href="../_modules/cdl_python/time_manager.html#TimeManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_python.time_manager.TimeManager" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Manages time for CDL block execution.</p>
+<p>Supports two modes:
+- SIMULATION: Manual time advancement with fixed or variable timesteps
+- REALTIME: Wall-clock time for actual building control</p>
+<p>Thread-safe for future CPRE asynchronous operation.</p>
+<p class="rubric">Example</p>
+<p># Simulation mode
+tm = TimeManager(mode=ExecutionMode.SIMULATION, time_step=0.1)
+tm.advance()  # Advances by 0.1 seconds</p>
+<p># Real-time mode
+tm = TimeManager(mode=ExecutionMode.REALTIME)
+current = tm.get_time()  # Returns wall-clock time</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_python.time_manager.TimeManager.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">ExecutionMode.REALTIME</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_python/time_manager.html#TimeManager.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_python.time_manager.TimeManager.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize TimeManager.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<a class="reference internal" href="#cdl_python.time_manager.ExecutionMode" title="cdl_python.time_manager.ExecutionMode"><em>ExecutionMode</em></a>) – ExecutionMode.SIMULATION or ExecutionMode.REALTIME</p></li>
+<li><p><strong>start_time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> | </em><em>None</em>) – Initial time (default: 0.0 for simulation, wall-clock for realtime)</p></li>
+<li><p><strong>time_step</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> | </em><em>None</em>) – Default timestep for simulation mode (seconds)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_python.time_manager.TimeManager.advance">
+<span class="sig-name descname"><span class="pre">advance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_python/time_manager.html#TimeManager.advance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_python.time_manager.TimeManager.advance" title="Link to this definition"></a></dt>
+<dd><p>Advance time.</p>
+<p>In SIMULATION mode: increments by dt (or time_step if dt not provided)
+In REALTIME mode: updates to current wall-clock time</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> | </em><em>None</em>) – Time increment in seconds (only used in SIMULATION mode)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>New current time</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If in SIMULATION mode and neither dt nor time_step is set</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_python.time_manager.TimeManager.get_time">
+<span class="sig-name descname"><span class="pre">get_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_python/time_manager.html#TimeManager.get_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_python.time_manager.TimeManager.get_time" title="Link to this definition"></a></dt>
+<dd><p>Get current time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Current time in seconds (simulation time or wall-clock time)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_python.time_manager.TimeManager.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_python/time_manager.html#TimeManager.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_python.time_manager.TimeManager.reset" title="Link to this definition"></a></dt>
+<dd><p>Reset time manager.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>start_time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> | </em><em>None</em>) – New start time (default: 0.0 for simulation, current wall-clock for realtime)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_python.time_manager.TimeManager.set_mode">
+<span class="sig-name descname"><span class="pre">set_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_python/time_manager.html#TimeManager.set_mode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_python.time_manager.TimeManager.set_mode" title="Link to this definition"></a></dt>
+<dd><p>Change execution mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<a class="reference internal" href="#cdl_python.time_manager.ExecutionMode" title="cdl_python.time_manager.ExecutionMode"><em>ExecutionMode</em></a>) – New execution mode</p></li>
+<li><p><strong>start_time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> | </em><em>None</em>) – Optional start time for new mode</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="generated/cdl_python.base.html" class="btn btn-neutral float-right" title="cdl_python.base" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, CDL Python Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

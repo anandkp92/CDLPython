@@ -1,0 +1,860 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cdl_translator package &mdash; CDL Python 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cdl_translator" href="generated/cdl_translator.html" />
+    <link rel="prev" title="cdl_python.CDL.Psychrometrics.WetBulb_TDryBulPhi" href="generated/cdl_python.CDL.Psychrometrics.WetBulb_TDryBulPhi.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CDL Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#virtual-environment-setup-recommended">Virtual Environment Setup (Recommended)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#basic-installation">Basic Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#documentation-installation">Documentation Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#complete-installation-development-docs">Complete Installation (Development + Docs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#verify-installation">Verify Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#requirements-files">Requirements Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#basic-concepts">Basic Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#your-first-cdl-block">Your First CDL Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#using-time-dependent-blocks">Using Time-Dependent Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#building-a-simple-controller">Building a Simple Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#using-pulse-generators">Using Pulse Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#using-time-tables">Using Time Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#translating-cxf-to-python">Translating CXF to Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cdl_python.html">cdl_python package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cdl_python.html#core-modules">Core Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/cdl_python.base.html">cdl_python.base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/cdl_python.time_manager.html">cdl_python.time_manager</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cdl_python.html#cdl-blocks">CDL Blocks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cdl_python.html#reals-package">Reals Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cdl_python.html#integers-package">Integers Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cdl_python.html#logical-package">Logical Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cdl_python.html#conversions-package">Conversions Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cdl_python.html#discrete-package">Discrete Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cdl_python.html#routing-package">Routing Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cdl_python.html#utilities-package">Utilities Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cdl_python.html#psychrometrics-package">Psychrometrics Package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cdl_python.html#module-reference">Module Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cdl_python.html#module-cdl_python.base">base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cdl_python.html#module-cdl_python.time_manager">time_manager module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">cdl_translator package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#package-overview">Package Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/cdl_translator.html">cdl_translator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#modules">Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#parser-module">parser module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#translator-module">translator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cli-module">cli module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#key-classes">Key Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cxfparser">CXFParser</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdlmodel">CDLModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#blockinstance">BlockInstance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#connection">Connection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythontranslator">PythonTranslator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#usage-example">Usage Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#command-line-usage">Command-Line Usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/sources.html">Source Block Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/sources.html#real-valued-sources">Real-Valued Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/sources.html#constant-source">Constant Source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/sources.html#sine-wave-generator">Sine Wave Generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/sources.html#pulse-generator">Pulse Generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/sources.html#ramp-generator">Ramp Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/sources.html#integer-sources">Integer Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/sources.html#integer-constant">Integer Constant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/sources.html#integer-pulse">Integer Pulse</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/sources.html#boolean-sources">Boolean Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/sources.html#boolean-constant">Boolean Constant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/sources.html#boolean-pulse">Boolean Pulse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/sources.html#sample-trigger">Sample Trigger</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/sources.html#calendar-time">Calendar Time</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/control_systems.html">Control System Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/control_systems.html#proportional-controller">Proportional Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/control_systems.html#pid-controller-example">PID Controller Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/control_systems.html#on-off-controller-with-hysteresis">On/Off Controller with Hysteresis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/control_systems.html#limiter-with-proportional-controller">Limiter with Proportional Controller</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/time_tables.html">Time Table Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/time_tables.html#daily-temperature-schedule">Daily Temperature Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/time_tables.html#weekly-occupancy-schedule">Weekly Occupancy Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/time_tables.html#multi-column-time-table">Multi-Column Time Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/time_tables.html#constant-segments-step-changes">Constant Segments (Step Changes)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/cxf_translation.html">CXF Translation Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/cxf_translation.html#basic-translation">Basic Translation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/cxf_translation.html#using-the-python-api">Using the Python API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/cxf_translation.html#using-the-command-line-interface">Using the Command-Line Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/cxf_translation.html#example-cxf-file">Example CXF File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/cxf_translation.html#generated-python-code">Generated Python Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/cxf_translation.html#using-generated-code">Using Generated Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/cxf_translation.html#inspecting-parsed-models">Inspecting Parsed Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/cxf_translation.html#batch-translation">Batch Translation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/index.html#basic-examples">Basic Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/index.html#source-blocks">Source Blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/index.html#control-systems">Control Systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/index.html#time-tables-and-scheduling">Time Tables and Scheduling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/index.html#cxf-translation">CXF Translation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Additional Information:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-1-0-current">Version 0.1.0 (Current)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#features">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#known-issues">Known Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#upcoming-features">Upcoming Features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#development-workflow">Development Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#running-tests">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#adding-a-new-cdl-block">Adding a New CDL Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#submitting-changes">Submitting Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#pull-request-guidelines">Pull Request Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#reporting-issues">Reporting Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#questions">Questions?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../license.html#mit-license">MIT License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../license.html#third-party-licenses">Third-Party Licenses</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CDL Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API Reference</a></li>
+      <li class="breadcrumb-item active">cdl_translator package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/cdl_translator.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cdl-translator-package">
+<h1>cdl_translator package<a class="headerlink" href="#cdl-translator-package" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">cdl_translator</span></code> package provides tools for translating CXF (CDL Exchange Format)
+files into executable Python code using the cdl_python library.</p>
+<section id="package-overview">
+<h2>Package Overview<a class="headerlink" href="#package-overview" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/cdl_translator.html#module-cdl_translator" title="cdl_translator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdl_translator</span></code></a></p></td>
+<td><p>CDL to Python Translator</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="modules">
+<h2>Modules<a class="headerlink" href="#modules" title="Link to this heading"></a></h2>
+<section id="parser-module">
+<h3>parser module<a class="headerlink" href="#parser-module" title="Link to this heading"></a></h3>
+<p>The parser module handles parsing of CXF (JSON-LD) files and building CDL model representations.</p>
+<p id="module-cdl_translator.parser">CXF JSON Parser</p>
+<p>Parses Control eXchange Format (CXF) JSON files generated by modelica-json
+into CDLModel internal representation.</p>
+<p>CXF Format:
+- Uses JSON-LD with &#64;context, &#64;graph, &#64;id, &#64;type
+- Supports both simple format and S231P namespace format
+- S231P format uses namespace prefix on all properties
+- Blocks have hasInput, hasOutput, hasParameter, containsBlock properties
+- Connections specified via connectedTo or isConnectedTo property on ports
+- Instance names use # separator: ModelName#instanceName</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cdl_translator.parser.CXFParser">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cdl_translator.parser.</span></span><span class="sig-name descname"><span class="pre">CXFParser</span></span><a class="reference internal" href="../_modules/cdl_translator/parser.html#CXFParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.parser.CXFParser" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Parser for CXF JSON files</p>
+<p>Converts CXF JSON (generated by modelica-json) to CDLModel
+internal representation for code generation.</p>
+<p>Supports both simple format and S231P namespace format.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.parser.CXFParser.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/parser.html#CXFParser.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.parser.CXFParser.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize parser</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.parser.CXFParser.parse_dict">
+<span class="sig-name descname"><span class="pre">parse_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cxf_data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/parser.html#CXFParser.parse_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.parser.CXFParser.parse_dict" title="Link to this definition"></a></dt>
+<dd><p>Parse CXF data from dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cxf_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><em>Any</em></a><em>]</em>) – CXF data as dictionary</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>CDLModel representation</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If data is invalid or missing required fields</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#cdl_translator.parser.CDLModel" title="cdl_translator.model.CDLModel"><em>CDLModel</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.parser.CXFParser.parse_file">
+<span class="sig-name descname"><span class="pre">parse_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cxf_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/parser.html#CXFParser.parse_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.parser.CXFParser.parse_file" title="Link to this definition"></a></dt>
+<dd><p>Parse CXF JSON file into CDLModel</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cxf_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Path to CXF JSON file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>CDLModel representation</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.14)"><strong>FileNotFoundError</strong></a> – If file doesn’t exist</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If JSON is invalid or missing required fields</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#cdl_translator.parser.CDLModel" title="cdl_translator.model.CDLModel"><em>CDLModel</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="translator-module">
+<h3>translator module<a class="headerlink" href="#translator-module" title="Link to this heading"></a></h3>
+<p>The translator module converts parsed CXF models into executable Python code.</p>
+<p id="module-cdl_translator.translator">Recursive CDL to Python translator</p>
+<p>This module provides the main translator class that handles recursive
+translation of CDL models with custom blocks.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cdl_translator.translator.RecursiveTranslator">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cdl_translator.translator.</span></span><span class="sig-name descname"><span class="pre">RecursiveTranslator</span></span><a class="reference internal" href="../_modules/cdl_translator/translator.html#RecursiveTranslator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.translator.RecursiveTranslator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Translates CDL models recursively, handling custom blocks</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.translator.RecursiveTranslator.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">search_paths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/translator.html#RecursiveTranslator.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.translator.RecursiveTranslator.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize translator</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>search_paths</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><em>List</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><em>Path</em></a><em>] </em><em>| </em><em>None</em>) – Additional directories to search for custom block CXF files</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.translator.RecursiveTranslator.translate_file">
+<span class="sig-name descname"><span class="pre">translate_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cxf_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/translator.html#RecursiveTranslator.translate_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.translator.RecursiveTranslator.translate_file" title="Link to this definition"></a></dt>
+<dd><p>Translate a CXF file and all its custom block dependencies</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cxf_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><em>Path</em></a>) – Path to the main CXF file</p></li>
+<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><em>Path</em></a><em> | </em><em>None</em>) – Optional directory to write generated files (if None, just return code)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary mapping block names to generated Python code</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.14)"><strong>FileNotFoundError</strong></a> – If CXF file not found</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If circular dependency detected</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><em>Dict</em></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cdl_translator.translator.translate_cxf">
+<span class="sig-prename descclassname"><span class="pre">cdl_translator.translator.</span></span><span class="sig-name descname"><span class="pre">translate_cxf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cxf_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_paths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/translator.html#translate_cxf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.translator.translate_cxf" title="Link to this definition"></a></dt>
+<dd><p>Translate a CXF file to Python code</p>
+<p>Automatically handles both:
+- Simple models (only standard CDL blocks) - generates one Python file
+- Complex models (with custom blocks) - recursively translates all dependencies</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cxf_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><em>Path</em></a>) – Path to the main CXF file</p></li>
+<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><em>Path</em></a><em> | </em><em>None</em>) – Optional directory to write generated files</p></li>
+<li><p><strong>search_paths</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><em>List</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><em>Path</em></a><em>] </em><em>| </em><em>None</em>) – Additional directories to search for custom blocks</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary mapping block names to generated Python code</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><em>Dict</em></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Simple model (no custom blocks):
+&gt;&gt;&gt; generated = translate_cxf(‘SimpleController.jsonld’, output_dir=’generated/’)
+&gt;&gt;&gt; # Creates: generated/SimpleController.py</p>
+<p>Complex model (with custom blocks):
+&gt;&gt;&gt; generated = translate_cxf(‘MyController.jsonld’, output_dir=’generated/’)
+&gt;&gt;&gt; # Creates: generated/SubController.py, generated/MyController.py</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cdl_translator.translator.translate_cxf_recursive">
+<span class="sig-prename descclassname"><span class="pre">cdl_translator.translator.</span></span><span class="sig-name descname"><span class="pre">translate_cxf_recursive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cxf_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_paths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/translator.html#translate_cxf_recursive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.translator.translate_cxf_recursive" title="Link to this definition"></a></dt>
+<dd><p>Deprecated: Use translate_cxf() instead</p>
+<p>This function is kept for backward compatibility.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cxf_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><em>Path</em></a>)</p></li>
+<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><em>Path</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>search_paths</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><em>List</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><em>Path</em></a><em>] </em><em>| </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><em>Dict</em></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="cli-module">
+<h3>cli module<a class="headerlink" href="#cli-module" title="Link to this heading"></a></h3>
+<p>Command-line interface for the CXF to Python translator.</p>
+</section>
+</section>
+<section id="key-classes">
+<h2>Key Classes<a class="headerlink" href="#key-classes" title="Link to this heading"></a></h2>
+<section id="cxfparser">
+<h3>CXFParser<a class="headerlink" href="#cxfparser" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="id0">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cdl_translator.parser.</span></span><span class="sig-name descname"><span class="pre">CXFParser</span></span><a class="reference internal" href="../_modules/cdl_translator/parser.html#CXFParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Parser for CXF JSON files</p>
+<p>Converts CXF JSON (generated by modelica-json) to CDLModel
+internal representation for code generation.</p>
+<p>Supports both simple format and S231P namespace format.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/parser.html#CXFParser.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd><p>Initialize parser</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">parse_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cxf_data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/parser.html#CXFParser.parse_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd><p>Parse CXF data from dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cxf_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><em>Any</em></a><em>]</em>) – CXF data as dictionary</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>CDLModel representation</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If data is invalid or missing required fields</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#cdl_translator.parser.CDLModel" title="cdl_translator.model.CDLModel"><em>CDLModel</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">parse_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cxf_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/parser.html#CXFParser.parse_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd><p>Parse CXF JSON file into CDLModel</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cxf_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Path to CXF JSON file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>CDLModel representation</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.14)"><strong>FileNotFoundError</strong></a> – If file doesn’t exist</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If JSON is invalid or missing required fields</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#cdl_translator.parser.CDLModel" title="cdl_translator.model.CDLModel"><em>CDLModel</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="cdlmodel">
+<h3>CDLModel<a class="headerlink" href="#cdlmodel" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cdl_translator.parser.CDLModel">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cdl_translator.parser.</span></span><span class="sig-name descname"><span class="pre">CDLModel</span></span><a class="reference internal" href="../_modules/cdl_translator/model.html#CDLModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.parser.CDLModel" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Complete CDL model representation</p>
+<p>Contains all information needed to generate Python code.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.parser.CDLModel.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instances=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connections=&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdl_translator.parser.CDLModel.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metadata</strong> (<em>ModelMetadata</em>)</p></li>
+<li><p><strong>instances</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><em>List</em></a><em>[</em><a class="reference internal" href="#cdl_translator.parser.BlockInstance" title="cdl_translator.model.BlockInstance"><em>BlockInstance</em></a><em>]</em>)</p></li>
+<li><p><strong>connections</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><em>List</em></a><em>[</em><a class="reference internal" href="#cdl_translator.parser.Connection" title="cdl_translator.model.Connection"><em>Connection</em></a><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.parser.CDLModel.get_computation_order">
+<span class="sig-name descname"><span class="pre">get_computation_order</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/model.html#CDLModel.get_computation_order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.parser.CDLModel.get_computation_order" title="Link to this definition"></a></dt>
+<dd><p>Topological sort of blocks based on connections</p>
+<p>Returns blocks in order such that all dependencies are
+computed before their dependents.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of BlockInstance in computation order</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If circular dependency detected</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><em>List</em></a>[<a class="reference internal" href="#cdl_translator.parser.BlockInstance" title="cdl_translator.model.BlockInstance"><em>BlockInstance</em></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.parser.CDLModel.get_instance">
+<span class="sig-name descname"><span class="pre">get_instance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/model.html#CDLModel.get_instance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.parser.CDLModel.get_instance" title="Link to this definition"></a></dt>
+<dd><p>Get block instance by name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#cdl_translator.parser.BlockInstance" title="cdl_translator.model.BlockInstance"><em>BlockInstance</em></a> | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.parser.CDLModel.get_required_imports">
+<span class="sig-name descname"><span class="pre">get_required_imports</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/model.html#CDLModel.get_required_imports"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.parser.CDLModel.get_required_imports" title="Link to this definition"></a></dt>
+<dd><p>Get all CDL imports needed (only standard blocks)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>Dictionary mapping module paths to set of class names
+Example: {</p>
+<blockquote>
+<div><p>”cdl_python.CDL.Reals”: {“Add”, “MultiplyByParameter”},
+“cdl_python.CDL.Logical”: {“And”}</p>
+</div></blockquote>
+<p>}</p>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><em>Dict</em></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.14)"><em>Set</em></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]]</p>
+</dd>
+</dl>
+<p>Note: Custom blocks are not included - they are imported separately</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.parser.CDLModel.needs_time_manager">
+<span class="sig-name descname"><span class="pre">needs_time_manager</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/model.html#CDLModel.needs_time_manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.parser.CDLModel.needs_time_manager" title="Link to this definition"></a></dt>
+<dd><p>Check if any block in the model needs TimeManager</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.parser.CDLModel.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/model.html#CDLModel.validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.parser.CDLModel.validate" title="Link to this definition"></a></dt>
+<dd><p>Validate model consistency</p>
+<p>Checks:
+- All connections reference valid instances/ports
+- No circular dependencies
+- Parameter types match
+- All inputs/outputs are connected</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple of (is_valid, list of error messages)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><em>Tuple</em></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><em>List</em></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="blockinstance">
+<h3>BlockInstance<a class="headerlink" href="#blockinstance" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cdl_translator.parser.BlockInstance">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cdl_translator.parser.</span></span><span class="sig-name descname"><span class="pre">BlockInstance</span></span><a class="reference internal" href="../_modules/cdl_translator/model.html#BlockInstance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.parser.BlockInstance" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Instance of a CDL block</p>
+<p>Represents a single block instantiation within a model.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.parser.BlockInstance.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters=&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdl_translator.parser.BlockInstance.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>instance_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>)</p></li>
+<li><p><strong>block_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>)</p></li>
+<li><p><strong>parameters</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><em>Any</em></a><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.parser.BlockInstance.get_custom_block_name">
+<span class="sig-name descname"><span class="pre">get_custom_block_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/model.html#BlockInstance.get_custom_block_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.parser.BlockInstance.get_custom_block_name" title="Link to this definition"></a></dt>
+<dd><p>Extract the simple name from a custom block type</p>
+<dl class="simple">
+<dt>For custom blocks like:</dt><dd><ul class="simple">
+<li><p>“ex:SubController” -&gt; “SubController”</p></li>
+<li><p>“<a class="reference external" href="http://example.org#FromModelica.SubController">http://example.org#FromModelica.SubController</a>” -&gt; “SubController”</p></li>
+<li><p>“MyPackage.MyBlock” -&gt; “MyBlock”</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Simple block name without namespace or path</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.parser.BlockInstance.get_python_import_path">
+<span class="sig-name descname"><span class="pre">get_python_import_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/model.html#BlockInstance.get_python_import_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.parser.BlockInstance.get_python_import_path" title="Link to this definition"></a></dt>
+<dd><p>Convert CDL path to Python import path</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple of (module_path, class_name)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><em>Tuple</em></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>“Buildings.Controls.OBC.CDL.Reals.Add”
+-&gt; (“cdl_python.CDL.Reals”, “Add”)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.parser.BlockInstance.is_custom_block">
+<span class="sig-name descname"><span class="pre">is_custom_block</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/model.html#BlockInstance.is_custom_block"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.parser.BlockInstance.is_custom_block" title="Link to this definition"></a></dt>
+<dd><p>Check if this is a custom/user-defined block</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if not a standard CDL block</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.parser.BlockInstance.is_standard_cdl_block">
+<span class="sig-name descname"><span class="pre">is_standard_cdl_block</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/model.html#BlockInstance.is_standard_cdl_block"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.parser.BlockInstance.is_standard_cdl_block" title="Link to this definition"></a></dt>
+<dd><p>Check if this is a standard CDL library block</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if block type contains ‘CDL’ (standard library block)
+False otherwise (custom/user-defined block)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.parser.BlockInstance.needs_time_manager">
+<span class="sig-name descname"><span class="pre">needs_time_manager</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/model.html#BlockInstance.needs_time_manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.parser.BlockInstance.needs_time_manager" title="Link to this definition"></a></dt>
+<dd><p>Check if this block requires a TimeManager</p>
+<p>Stateful blocks (integrators, PIDs, timers, delays, etc.)
+require a TimeManager for time-dependent operations.</p>
+<p>Custom blocks are assumed to handle their own time management internally.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="connection">
+<h3>Connection<a class="headerlink" href="#connection" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cdl_translator.parser.Connection">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cdl_translator.parser.</span></span><span class="sig-name descname"><span class="pre">Connection</span></span><a class="reference internal" href="../_modules/cdl_translator/model.html#Connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.parser.Connection" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Connection between ports</p>
+<p>Represents data flow from source to target.
+Can connect:
+- Model input -&gt; block input
+- Block output -&gt; block input
+- Block output -&gt; model output</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.parser.Connection.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_block</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_block</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdl_translator.parser.Connection.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_block</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>)</p></li>
+<li><p><strong>source_port</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>)</p></li>
+<li><p><strong>target_block</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>)</p></li>
+<li><p><strong>target_port</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.parser.Connection.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/model.html#Connection.__str__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.parser.Connection.__str__" title="Link to this definition"></a></dt>
+<dd><p>Human-readable representation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.parser.Connection.is_from_input">
+<span class="sig-name descname"><span class="pre">is_from_input</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/model.html#Connection.is_from_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.parser.Connection.is_from_input" title="Link to this definition"></a></dt>
+<dd><p>Check if connection is from model input</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cdl_translator.parser.Connection.is_to_output">
+<span class="sig-name descname"><span class="pre">is_to_output</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cdl_translator/model.html#Connection.is_to_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cdl_translator.parser.Connection.is_to_output" title="Link to this definition"></a></dt>
+<dd><p>Check if connection is to model output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="pythontranslator">
+<h3>PythonTranslator<a class="headerlink" href="#pythontranslator" title="Link to this heading"></a></h3>
+</section>
+</section>
+<section id="usage-example">
+<h2>Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading"></a></h2>
+<p>Basic usage of the translator:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cdl_translator.parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">CXFParser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cdl_translator.translator</span><span class="w"> </span><span class="kn">import</span> <span class="n">PythonTranslator</span>
+
+<span class="c1"># Parse CXF file</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">CXFParser</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_file</span><span class="p">(</span><span class="s1">&#39;controller.json&#39;</span><span class="p">)</span>
+
+<span class="c1"># Translate to Python</span>
+<span class="n">translator</span> <span class="o">=</span> <span class="n">PythonTranslator</span><span class="p">()</span>
+<span class="n">python_code</span> <span class="o">=</span> <span class="n">translator</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="c1"># Save to file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;controller.py&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">python_code</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="command-line-usage">
+<h2>Command-Line Usage<a class="headerlink" href="#command-line-usage" title="Link to this heading"></a></h2>
+<p>The package includes a CLI tool for easy translation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Translate a single file</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">cdl_translator</span><span class="o">.</span><span class="n">cli</span> <span class="nb">input</span><span class="o">.</span><span class="n">json</span> <span class="o">-</span><span class="n">o</span> <span class="n">output</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1"># Translate with verbose output</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">cdl_translator</span><span class="o">.</span><span class="n">cli</span> <span class="nb">input</span><span class="o">.</span><span class="n">json</span> <span class="o">-</span><span class="n">o</span> <span class="n">output</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">v</span>
+
+<span class="c1"># Display help</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">cdl_translator</span><span class="o">.</span><span class="n">cli</span> <span class="o">--</span><span class="n">help</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generated/cdl_python.CDL.Psychrometrics.WetBulb_TDryBulPhi.html" class="btn btn-neutral float-left" title="cdl_python.CDL.Psychrometrics.WetBulb_TDryBulPhi" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="generated/cdl_translator.html" class="btn btn-neutral float-right" title="cdl_translator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, CDL Python Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

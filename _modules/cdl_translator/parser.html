@@ -1,0 +1,980 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cdl_translator.parser &mdash; CDL Python 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            CDL Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#virtual-environment-setup-recommended">Virtual Environment Setup (Recommended)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#basic-installation">Basic Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#documentation-installation">Documentation Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#complete-installation-development-docs">Complete Installation (Development + Docs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#verify-installation">Verify Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#requirements-files">Requirements Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#basic-concepts">Basic Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#your-first-cdl-block">Your First CDL Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#using-time-dependent-blocks">Using Time-Dependent Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#building-a-simple-controller">Building a Simple Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#using-pulse-generators">Using Pulse Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#using-time-tables">Using Time Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#translating-cxf-to-python">Translating CXF to Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/cdl_python.html">cdl_python package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/cdl_python.html#core-modules">Core Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/generated/cdl_python.base.html">cdl_python.base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/generated/cdl_python.time_manager.html">cdl_python.time_manager</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/cdl_python.html#cdl-blocks">CDL Blocks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_python.html#reals-package">Reals Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_python.html#integers-package">Integers Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_python.html#logical-package">Logical Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_python.html#conversions-package">Conversions Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_python.html#discrete-package">Discrete Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_python.html#routing-package">Routing Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_python.html#utilities-package">Utilities Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_python.html#psychrometrics-package">Psychrometrics Package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/cdl_python.html#module-reference">Module Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_python.html#module-cdl_python.base">base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_python.html#module-cdl_python.time_manager">time_manager module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/cdl_translator.html">cdl_translator package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/cdl_translator.html#package-overview">Package Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/generated/cdl_translator.html">cdl_translator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/cdl_translator.html#modules">Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_translator.html#parser-module">parser module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_translator.html#translator-module">translator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_translator.html#cli-module">cli module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/cdl_translator.html#key-classes">Key Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_translator.html#cxfparser">CXFParser</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_translator.html#cdlmodel">CDLModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_translator.html#blockinstance">BlockInstance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_translator.html#connection">Connection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/cdl_translator.html#pythontranslator">PythonTranslator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/cdl_translator.html#usage-example">Usage Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/cdl_translator.html#command-line-usage">Command-Line Usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/sources.html">Source Block Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/sources.html#real-valued-sources">Real-Valued Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#constant-source">Constant Source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#sine-wave-generator">Sine Wave Generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#pulse-generator">Pulse Generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#ramp-generator">Ramp Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/sources.html#integer-sources">Integer Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#integer-constant">Integer Constant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#integer-pulse">Integer Pulse</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/sources.html#boolean-sources">Boolean Sources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#boolean-constant">Boolean Constant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#boolean-pulse">Boolean Pulse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/sources.html#sample-trigger">Sample Trigger</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/sources.html#calendar-time">Calendar Time</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/control_systems.html">Control System Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/control_systems.html#proportional-controller">Proportional Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/control_systems.html#pid-controller-example">PID Controller Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/control_systems.html#on-off-controller-with-hysteresis">On/Off Controller with Hysteresis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/control_systems.html#limiter-with-proportional-controller">Limiter with Proportional Controller</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/time_tables.html">Time Table Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/time_tables.html#daily-temperature-schedule">Daily Temperature Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/time_tables.html#weekly-occupancy-schedule">Weekly Occupancy Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/time_tables.html#multi-column-time-table">Multi-Column Time Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/time_tables.html#constant-segments-step-changes">Constant Segments (Step Changes)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/cxf_translation.html">CXF Translation Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/cxf_translation.html#basic-translation">Basic Translation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/cxf_translation.html#using-the-python-api">Using the Python API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/cxf_translation.html#using-the-command-line-interface">Using the Command-Line Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/cxf_translation.html#example-cxf-file">Example CXF File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/cxf_translation.html#generated-python-code">Generated Python Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/cxf_translation.html#using-generated-code">Using Generated Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/cxf_translation.html#inspecting-parsed-models">Inspecting Parsed Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/cxf_translation.html#batch-translation">Batch Translation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html#basic-examples">Basic Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/index.html#source-blocks">Source Blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/index.html#control-systems">Control Systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/index.html#time-tables-and-scheduling">Time Tables and Scheduling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/index.html#cxf-translation">CXF Translation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Additional Information:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#version-0-1-0-current">Version 0.1.0 (Current)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#features">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#known-issues">Known Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#upcoming-features">Upcoming Features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#development-workflow">Development Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#running-tests">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#adding-a-new-cdl-block">Adding a New CDL Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#submitting-changes">Submitting Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#pull-request-guidelines">Pull Request Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#reporting-issues">Reporting Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#questions">Questions?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../license.html#mit-license">MIT License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../license.html#third-party-licenses">Third-Party Licenses</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CDL Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">cdl_translator.parser</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for cdl_translator.parser</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;CXF JSON Parser</span>
+
+<span class="sd">Parses Control eXchange Format (CXF) JSON files generated by modelica-json</span>
+<span class="sd">into CDLModel internal representation.</span>
+
+<span class="sd">CXF Format:</span>
+<span class="sd">- Uses JSON-LD with @context, @graph, @id, @type</span>
+<span class="sd">- Supports both simple format and S231P namespace format</span>
+<span class="sd">- S231P format uses namespace prefix on all properties</span>
+<span class="sd">- Blocks have hasInput, hasOutput, hasParameter, containsBlock properties</span>
+<span class="sd">- Connections specified via connectedTo or isConnectedTo property on ports</span>
+<span class="sd">- Instance names use # separator: ModelName#instanceName</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cdl_translator.model</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">CDLModel</span><span class="p">,</span>
+    <span class="n">ModelMetadata</span><span class="p">,</span>
+    <span class="n">BlockInstance</span><span class="p">,</span>
+    <span class="n">Connection</span><span class="p">,</span>
+    <span class="n">Parameter</span><span class="p">,</span>
+    <span class="n">Port</span><span class="p">,</span>
+    <span class="n">PortType</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="CXFParser">
+<a class="viewcode-back" href="../../api/cdl_translator.html#cdl_translator.parser.CXFParser">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CXFParser</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parser for CXF JSON files</span>
+
+<span class="sd">    Converts CXF JSON (generated by modelica-json) to CDLModel</span>
+<span class="sd">    internal representation for code generation.</span>
+
+<span class="sd">    Supports both simple format and S231P namespace format.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="CXFParser.__init__">
+<a class="viewcode-back" href="../../api/cdl_translator.html#cdl_translator.parser.CXFParser.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize parser&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id_map</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Map of @id to object for S231P format</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_prop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">prop_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get property with or without S231P namespace</span>
+
+<span class="sd">        Tries S231P:propertyName first, then propertyName.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            obj: Object dictionary</span>
+<span class="sd">            prop_name: Property name without namespace</span>
+<span class="sd">            default: Default value if not found</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Property value or default</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Try with S231P namespace</span>
+        <span class="k">if</span> <span class="sa">f</span><span class="s2">&quot;S231P:</span><span class="si">{</span><span class="n">prop_name</span><span class="si">}</span><span class="s2">&quot;</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">obj</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;S231P:</span><span class="si">{</span><span class="n">prop_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span>
+        <span class="c1"># Try without namespace</span>
+        <span class="k">if</span> <span class="n">prop_name</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">obj</span><span class="p">[</span><span class="n">prop_name</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">default</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_extract_id_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract name from @id URI</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            id_str: @id URI like &quot;http://example.org#FromModelica.Block1&quot;</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Name part after # (e.g., &quot;FromModelica.Block1&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s1">&#39;#&#39;</span> <span class="ow">in</span> <span class="n">id_str</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">id_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">id_str</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_extract_simple_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract simple name from @id URI</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            id_str: @id URI like &quot;http://example.org#FromModelica.CustomPWithLimiter&quot;</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Last part of name (e.g., &quot;CustomPWithLimiter&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">full_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_id_name</span><span class="p">(</span><span class="n">id_str</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">full_name</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">full_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">full_name</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_extract_block_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract CDL block type from URI</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            type_uri: Full URI like</span>
+<span class="sd">                      &quot;http://example.org#Buildings.Controls.OBC.CDL.Reals.Min&quot;</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            CDL type: &quot;Buildings.Controls.OBC.CDL.Reals.Min&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_id_name</span><span class="p">(</span><span class="n">type_uri</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_id_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cxf_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build map of @id to object for resolution</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cxf_data: CXF dictionary</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary mapping @id to object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">id_map</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># Check if @graph exists</span>
+        <span class="k">if</span> <span class="s1">&#39;@graph&#39;</span> <span class="ow">in</span> <span class="n">cxf_data</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">cxf_data</span><span class="p">[</span><span class="s1">&#39;@graph&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="s1">&#39;@id&#39;</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">:</span>
+                    <span class="n">id_map</span><span class="p">[</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;@id&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">obj</span>
+        <span class="c1"># Also map the root object if it has @id</span>
+        <span class="k">elif</span> <span class="s1">&#39;@id&#39;</span> <span class="ow">in</span> <span class="n">cxf_data</span><span class="p">:</span>
+            <span class="n">id_map</span><span class="p">[</span><span class="n">cxf_data</span><span class="p">[</span><span class="s1">&#39;@id&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">cxf_data</span>
+
+        <span class="k">return</span> <span class="n">id_map</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_ref</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ref</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">],</span> <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Resolve @id reference</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ref: Either a string @id or dict with @id</span>
+<span class="sd">            default: Default value if not found</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Resolved object or default</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Extract @id</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;@id&#39;</span> <span class="ow">in</span> <span class="n">ref</span><span class="p">:</span>
+            <span class="n">ref_id</span> <span class="o">=</span> <span class="n">ref</span><span class="p">[</span><span class="s1">&#39;@id&#39;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">ref_id</span> <span class="o">=</span> <span class="n">ref</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">default</span>
+
+        <span class="c1"># Resolve from id_map</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">id_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ref_id</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CXFParser.parse_file">
+<a class="viewcode-back" href="../../api/cdl_translator.html#cdl_translator.parser.CXFParser.parse_file">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cxf_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CDLModel</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse CXF JSON file into CDLModel</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cxf_path: Path to CXF JSON file</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            CDLModel representation</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            FileNotFoundError: If file doesn&#39;t exist</span>
+<span class="sd">            ValueError: If JSON is invalid or missing required fields</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">cxf_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CXF file not found: </span><span class="si">{</span><span class="n">cxf_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">cxf_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_dict</span><span class="p">(</span><span class="n">cxf_data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CXFParser.parse_dict">
+<a class="viewcode-back" href="../../api/cdl_translator.html#cdl_translator.parser.CXFParser.parse_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cxf_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">CDLModel</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse CXF data from dictionary</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cxf_data: CXF data as dictionary</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            CDLModel representation</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If data is invalid or missing required fields</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_cxf</span><span class="p">(</span><span class="n">cxf_data</span><span class="p">)</span>
+
+        <span class="c1"># Build @id resolution map for S231P format</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_id_map</span><span class="p">(</span><span class="n">cxf_data</span><span class="p">)</span>
+
+        <span class="c1"># Extract main model data</span>
+        <span class="c1"># S231P format can have @graph or be root object</span>
+        <span class="k">if</span> <span class="s1">&#39;@graph&#39;</span> <span class="ow">in</span> <span class="n">cxf_data</span><span class="p">:</span>
+            <span class="c1"># Find main block (should be first or has S231P:Block type)</span>
+            <span class="n">model_data</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">cxf_data</span><span class="p">[</span><span class="s1">&#39;@graph&#39;</span><span class="p">]:</span>
+                <span class="n">obj_type</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;@type&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s1">&#39;Block&#39;</span> <span class="ow">in</span> <span class="n">obj_type</span><span class="p">:</span>
+                    <span class="n">model_data</span> <span class="o">=</span> <span class="n">obj</span>
+                    <span class="k">break</span>
+            <span class="k">if</span> <span class="n">model_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">model_data</span> <span class="o">=</span> <span class="n">cxf_data</span><span class="p">[</span><span class="s1">&#39;@graph&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Root object is the model</span>
+            <span class="n">model_data</span> <span class="o">=</span> <span class="n">cxf_data</span>
+
+        <span class="c1"># Parse components</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_metadata</span><span class="p">(</span><span class="n">model_data</span><span class="p">)</span>
+        <span class="n">instances</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_instances</span><span class="p">(</span><span class="n">model_data</span><span class="p">)</span>
+        <span class="n">connections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_connections</span><span class="p">(</span><span class="n">model_data</span><span class="p">,</span> <span class="n">instances</span><span class="p">)</span>
+
+        <span class="n">model</span> <span class="o">=</span> <span class="n">CDLModel</span><span class="p">(</span>
+            <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span>
+            <span class="n">instances</span><span class="o">=</span><span class="n">instances</span><span class="p">,</span>
+            <span class="n">connections</span><span class="o">=</span><span class="n">connections</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Validate generated model</span>
+        <span class="n">is_valid</span><span class="p">,</span> <span class="n">errors</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_valid</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated model invalid: </span><span class="si">{</span><span class="s1">&#39;; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">model</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ModelMetadata</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract model metadata</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            model_data: Model dictionary from CXF</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ModelMetadata</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Extract model name from @id or label</span>
+        <span class="k">if</span> <span class="s1">&#39;@id&#39;</span> <span class="ow">in</span> <span class="n">model_data</span><span class="p">:</span>
+            <span class="n">model_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_simple_name</span><span class="p">(</span><span class="n">model_data</span><span class="p">[</span><span class="s1">&#39;@id&#39;</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">model_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">model_data</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;UnnamedModel&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Get description (can be in description or documentation)</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">model_data</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">description</span><span class="p">:</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">model_data</span><span class="p">,</span> <span class="s1">&#39;documentation&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Parse parameters</span>
+        <span class="n">parameters</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">has_param</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">model_data</span><span class="p">,</span> <span class="s1">&#39;hasParameter&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">has_param</span><span class="p">:</span>
+            <span class="c1"># Can be single parameter or list</span>
+            <span class="n">param_list</span> <span class="o">=</span> <span class="n">has_param</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">has_param</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">has_param</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">param_ref</span> <span class="ow">in</span> <span class="n">param_list</span><span class="p">:</span>
+                <span class="c1"># Resolve reference if needed</span>
+                <span class="n">param_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_ref</span><span class="p">(</span><span class="n">param_ref</span><span class="p">,</span> <span class="n">param_ref</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">param_data</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">param_data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="n">param</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_parameter</span><span class="p">(</span><span class="n">param_data</span><span class="p">)</span>
+                    <span class="n">parameters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
+
+        <span class="c1"># Parse inputs</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">has_input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">model_data</span><span class="p">,</span> <span class="s1">&#39;hasInput&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">has_input</span><span class="p">:</span>
+            <span class="c1"># Can be single input or list</span>
+            <span class="n">input_list</span> <span class="o">=</span> <span class="n">has_input</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">has_input</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">has_input</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">input_ref</span> <span class="ow">in</span> <span class="n">input_list</span><span class="p">:</span>
+                <span class="c1"># Resolve reference if needed</span>
+                <span class="n">input_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_ref</span><span class="p">(</span><span class="n">input_ref</span><span class="p">,</span> <span class="n">input_ref</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">input_data</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="n">port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_port</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>
+                    <span class="n">inputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">port</span><span class="p">)</span>
+
+        <span class="c1"># Parse outputs</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">has_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">model_data</span><span class="p">,</span> <span class="s1">&#39;hasOutput&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">has_output</span><span class="p">:</span>
+            <span class="c1"># Can be single output or list</span>
+            <span class="n">output_list</span> <span class="o">=</span> <span class="n">has_output</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">has_output</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">has_output</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">output_ref</span> <span class="ow">in</span> <span class="n">output_list</span><span class="p">:</span>
+                <span class="c1"># Resolve reference if needed</span>
+                <span class="n">output_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_ref</span><span class="p">(</span><span class="n">output_ref</span><span class="p">,</span> <span class="n">output_ref</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">output_data</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output_data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="n">port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_port</span><span class="p">(</span><span class="n">output_data</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>
+                    <span class="n">outputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">port</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">ModelMetadata</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+            <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span>
+            <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span>
+            <span class="n">outputs</span><span class="o">=</span><span class="n">outputs</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_instances</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">BlockInstance</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract block instances</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            model_data: Model dictionary from CXF</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of BlockInstance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">instances</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">contains_block</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">model_data</span><span class="p">,</span> <span class="s1">&#39;containsBlock&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">contains_block</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">instances</span>
+
+        <span class="c1"># Ensure it&#39;s a list</span>
+        <span class="n">block_list</span> <span class="o">=</span> <span class="n">contains_block</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contains_block</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">contains_block</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">block_ref</span> <span class="ow">in</span> <span class="n">block_list</span><span class="p">:</span>
+            <span class="c1"># Resolve reference to get actual block data</span>
+            <span class="n">block_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_ref</span><span class="p">(</span><span class="n">block_ref</span><span class="p">,</span> <span class="n">block_ref</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">block_data</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">block_data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># Extract instance name from @id or label</span>
+            <span class="k">if</span> <span class="s1">&#39;@id&#39;</span> <span class="ow">in</span> <span class="n">block_data</span><span class="p">:</span>
+                <span class="n">full_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_id_name</span><span class="p">(</span><span class="n">block_data</span><span class="p">[</span><span class="s1">&#39;@id&#39;</span><span class="p">])</span>
+                <span class="c1"># Instance name is the last part after last dot</span>
+                <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">full_id</span><span class="p">:</span>
+                    <span class="n">instance_name</span> <span class="o">=</span> <span class="n">full_id</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">instance_name</span> <span class="o">=</span> <span class="n">full_id</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">instance_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">block_data</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;unnamed&#39;</span><span class="p">)</span>
+
+            <span class="c1"># Extract block type from @type</span>
+            <span class="n">block_type_raw</span> <span class="o">=</span> <span class="n">block_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;@type&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">block_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_block_type</span><span class="p">(</span><span class="n">block_type_raw</span><span class="p">)</span>
+
+            <span class="c1"># Parse parameters from hasInstance</span>
+            <span class="n">parameters</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">has_instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">block_data</span><span class="p">,</span> <span class="s1">&#39;hasInstance&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">has_instance</span><span class="p">:</span>
+                <span class="c1"># Ensure it&#39;s a list</span>
+                <span class="n">instance_list</span> <span class="o">=</span> <span class="n">has_instance</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">has_instance</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">has_instance</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">inst_ref</span> <span class="ow">in</span> <span class="n">instance_list</span><span class="p">:</span>
+                    <span class="n">inst_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_ref</span><span class="p">(</span><span class="n">inst_ref</span><span class="p">,</span> <span class="n">inst_ref</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">inst_data</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">inst_data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                        <span class="k">continue</span>
+
+                    <span class="c1"># Check if this is a parameter (has value property)</span>
+                    <span class="k">if</span> <span class="s1">&#39;S231P:value&#39;</span> <span class="ow">in</span> <span class="n">inst_data</span> <span class="ow">or</span> <span class="s1">&#39;value&#39;</span> <span class="ow">in</span> <span class="n">inst_data</span><span class="p">:</span>
+                        <span class="n">param</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_parameter</span><span class="p">(</span><span class="n">inst_data</span><span class="p">)</span>
+                        <span class="c1"># Handle parameter references</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">value</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                            <span class="c1"># Looks like a reference, not a number</span>
+                            <span class="c1"># Check if it&#39;s a parent parameter reference</span>
+                            <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">value</span> <span class="ow">or</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">id_map</span><span class="p">:</span>
+                                <span class="c1"># Simple name - reference to parent parameter</span>
+                                <span class="n">value</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;self.</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
+                        <span class="n">parameters</span><span class="p">[</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+            <span class="n">instance</span> <span class="o">=</span> <span class="n">BlockInstance</span><span class="p">(</span>
+                <span class="n">instance_name</span><span class="o">=</span><span class="n">instance_name</span><span class="p">,</span>
+                <span class="n">block_type</span><span class="o">=</span><span class="n">block_type</span><span class="p">,</span>
+                <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span>
+            <span class="p">)</span>
+            <span class="n">instances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">instances</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_connections</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">model_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+        <span class="n">instances</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">BlockInstance</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Connection</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract connections from port connectedTo properties</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            model_data: Model dictionary from CXF @graph</span>
+<span class="sd">            instances: List of parsed block instances</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of Connection</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">connections</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">model_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_simple_name</span><span class="p">(</span><span class="n">model_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;@id&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+
+        <span class="c1"># Extract all port connections</span>
+        <span class="n">port_connections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_port_connections</span><span class="p">(</span><span class="n">model_data</span><span class="p">)</span>
+
+        <span class="c1"># Convert port connections to Connection objects</span>
+        <span class="k">for</span> <span class="n">port_id</span><span class="p">,</span> <span class="n">connected_to</span><span class="p">,</span> <span class="n">is_input_port</span> <span class="ow">in</span> <span class="n">port_connections</span><span class="p">:</span>
+            <span class="c1"># Connection semantics:</span>
+            <span class="c1"># S231P format (isConnectedTo): port with connection is always the SOURCE</span>
+            <span class="c1">#   - port -&gt; isConnectedTo (always this direction)</span>
+            <span class="c1"># Old format (connectedTo): depends on port type</span>
+            <span class="c1">#   - INPUT connectedTo X: X -&gt; INPUT (X is source)</span>
+            <span class="c1">#   - OUTPUT connectedTo Y: OUTPUT -&gt; Y (OUTPUT is source)</span>
+
+            <span class="c1"># Detect format by checking if port is model-level or block-level</span>
+            <span class="n">port_block</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_port_id</span><span class="p">(</span><span class="n">port_id</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>
+            <span class="n">connected_block</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_port_id</span><span class="p">(</span><span class="n">connected_to</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>
+
+            <span class="c1"># S231P format: model-level ports have isConnectedTo (port is source)</span>
+            <span class="c1"># Old format: only block-level ports have connectedTo</span>
+            <span class="k">if</span> <span class="n">port_block</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># Model-level port with connection -&gt; S231P format</span>
+                <span class="c1"># Port is source, connectedTo is target</span>
+                <span class="n">source_block</span><span class="p">,</span> <span class="n">source_port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_port_id</span><span class="p">(</span><span class="n">port_id</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>
+                <span class="n">target_block</span><span class="p">,</span> <span class="n">target_port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_port_id</span><span class="p">(</span><span class="n">connected_to</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">connected_block</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># Block-level port connected to model port -&gt; Old format</span>
+                <span class="c1"># For inputs: connected (model) is source, port (block) is target</span>
+                <span class="c1"># For outputs: port (block) is source, connected (model) is target</span>
+                <span class="k">if</span> <span class="n">is_input_port</span><span class="p">:</span>
+                    <span class="n">source_block</span><span class="p">,</span> <span class="n">source_port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_port_id</span><span class="p">(</span><span class="n">connected_to</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>
+                    <span class="n">target_block</span><span class="p">,</span> <span class="n">target_port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_port_id</span><span class="p">(</span><span class="n">port_id</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">source_block</span><span class="p">,</span> <span class="n">source_port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_port_id</span><span class="p">(</span><span class="n">port_id</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>
+                    <span class="n">target_block</span><span class="p">,</span> <span class="n">target_port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_port_id</span><span class="p">(</span><span class="n">connected_to</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Block-to-block connection (both formats use same semantics)</span>
+                <span class="c1"># Port with connection is source</span>
+                <span class="n">source_block</span><span class="p">,</span> <span class="n">source_port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_port_id</span><span class="p">(</span><span class="n">port_id</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>
+                <span class="n">target_block</span><span class="p">,</span> <span class="n">target_port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_port_id</span><span class="p">(</span><span class="n">connected_to</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>
+
+            <span class="n">connection</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span>
+                <span class="n">source_block</span><span class="o">=</span><span class="n">source_block</span><span class="p">,</span>
+                <span class="n">source_port</span><span class="o">=</span><span class="n">source_port</span><span class="p">,</span>
+                <span class="n">target_block</span><span class="o">=</span><span class="n">target_block</span><span class="p">,</span>
+                <span class="n">target_port</span><span class="o">=</span><span class="n">target_port</span>
+            <span class="p">)</span>
+            <span class="n">connections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">connections</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_extract_port_connections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">block_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Recursively extract all port connections from block</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            block_data: Block dictionary</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of tuples: (port_id, connectedTo_id, is_input_port)</span>
+<span class="sd">            is_input_port indicates if the port is an input (affects connection direction)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Use list to collect all connections (including multiple from same port)</span>
+        <span class="n">connections_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Track seen connections to avoid duplicates</span>
+        <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="c1"># Helper to extract connection from port object</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">extract_connection</span><span class="p">(</span><span class="n">port_obj</span><span class="p">,</span> <span class="n">is_input</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">port_obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">return</span>
+            <span class="c1"># Resolve if it&#39;s a reference</span>
+            <span class="n">port_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_ref</span><span class="p">(</span><span class="n">port_obj</span><span class="p">,</span> <span class="n">port_obj</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">port_data</span> <span class="ow">or</span> <span class="s1">&#39;@id&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">port_data</span><span class="p">:</span>
+                <span class="k">return</span>
+
+            <span class="n">port_id</span> <span class="o">=</span> <span class="n">port_data</span><span class="p">[</span><span class="s1">&#39;@id&#39;</span><span class="p">]</span>
+
+            <span class="c1"># Check for connectedTo or isConnectedTo</span>
+            <span class="n">connected</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">port_data</span><span class="p">,</span> <span class="s1">&#39;connectedTo&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">port_data</span><span class="p">,</span> <span class="s1">&#39;isConnectedTo&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">connected</span><span class="p">:</span>
+                <span class="c1"># Handle list of connections (port connected to multiple targets)</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connected</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">conn_item</span> <span class="ow">in</span> <span class="n">connected</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">conn_item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;@id&#39;</span> <span class="ow">in</span> <span class="n">conn_item</span><span class="p">:</span>
+                            <span class="n">target_id</span> <span class="o">=</span> <span class="n">conn_item</span><span class="p">[</span><span class="s1">&#39;@id&#39;</span><span class="p">]</span>
+                        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">conn_item</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                            <span class="n">target_id</span> <span class="o">=</span> <span class="n">conn_item</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">continue</span>
+                        <span class="c1"># Add if not already seen</span>
+                        <span class="n">conn_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="n">port_id</span><span class="p">,</span> <span class="n">target_id</span><span class="p">,</span> <span class="n">is_input</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">conn_tuple</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                            <span class="n">connections_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">conn_tuple</span><span class="p">)</span>
+                            <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">conn_tuple</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># Single connection</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connected</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;@id&#39;</span> <span class="ow">in</span> <span class="n">connected</span><span class="p">:</span>
+                        <span class="n">target_id</span> <span class="o">=</span> <span class="n">connected</span><span class="p">[</span><span class="s1">&#39;@id&#39;</span><span class="p">]</span>
+                    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connected</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                        <span class="n">target_id</span> <span class="o">=</span> <span class="n">connected</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">return</span>
+
+                    <span class="c1"># Add if not already seen</span>
+                    <span class="n">conn_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="n">port_id</span><span class="p">,</span> <span class="n">target_id</span><span class="p">,</span> <span class="n">is_input</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">conn_tuple</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                        <span class="n">connections_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">conn_tuple</span><span class="p">)</span>
+                        <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">conn_tuple</span><span class="p">)</span>
+
+        <span class="c1"># Check inputs - for inputs, connectedTo/isConnectedTo is the SOURCE</span>
+        <span class="n">has_input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">block_data</span><span class="p">,</span> <span class="s1">&#39;hasInput&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">has_input</span><span class="p">:</span>
+            <span class="n">input_list</span> <span class="o">=</span> <span class="n">has_input</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">has_input</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">has_input</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">input_obj</span> <span class="ow">in</span> <span class="n">input_list</span><span class="p">:</span>
+                <span class="n">extract_connection</span><span class="p">(</span><span class="n">input_obj</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Check outputs - for outputs, connectedTo/isConnectedTo is the TARGET</span>
+        <span class="n">has_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">block_data</span><span class="p">,</span> <span class="s1">&#39;hasOutput&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">has_output</span><span class="p">:</span>
+            <span class="n">output_list</span> <span class="o">=</span> <span class="n">has_output</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">has_output</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">has_output</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">output_obj</span> <span class="ow">in</span> <span class="n">output_list</span><span class="p">:</span>
+                <span class="n">extract_connection</span><span class="p">(</span><span class="n">output_obj</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># Check hasInstance (used by contained blocks to list their ports)</span>
+        <span class="n">has_instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">block_data</span><span class="p">,</span> <span class="s1">&#39;hasInstance&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">has_instance</span><span class="p">:</span>
+            <span class="n">instance_list</span> <span class="o">=</span> <span class="n">has_instance</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">has_instance</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">has_instance</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">instance_obj</span> <span class="ow">in</span> <span class="n">instance_list</span><span class="p">:</span>
+                <span class="n">instance_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_ref</span><span class="p">(</span><span class="n">instance_obj</span><span class="p">,</span> <span class="n">instance_obj</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">instance_data</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instance_data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="c1"># Determine if this is an input or output by checking @type</span>
+                    <span class="n">inst_type</span> <span class="o">=</span> <span class="n">instance_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;@type&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+                    <span class="n">is_input</span> <span class="o">=</span> <span class="s1">&#39;Input&#39;</span> <span class="ow">in</span> <span class="n">inst_type</span>
+                    <span class="c1"># Extract connection regardless of input/output</span>
+                    <span class="n">extract_connection</span><span class="p">(</span><span class="n">instance_data</span><span class="p">,</span> <span class="n">is_input</span><span class="p">)</span>
+
+        <span class="c1"># Recursively check contained blocks</span>
+        <span class="n">contains_block</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">block_data</span><span class="p">,</span> <span class="s1">&#39;containsBlock&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">contains_block</span><span class="p">:</span>
+            <span class="n">block_list</span> <span class="o">=</span> <span class="n">contains_block</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contains_block</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">contains_block</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">block_ref</span> <span class="ow">in</span> <span class="n">block_list</span><span class="p">:</span>
+                <span class="n">block_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_ref</span><span class="p">(</span><span class="n">block_ref</span><span class="p">,</span> <span class="n">block_ref</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">block_obj</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">block_obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="n">sub_connections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_port_connections</span><span class="p">(</span><span class="n">block_obj</span><span class="p">)</span>
+                    <span class="c1"># Merge sub-connections into our list (avoiding duplicates)</span>
+                    <span class="k">for</span> <span class="n">conn_tuple</span> <span class="ow">in</span> <span class="n">sub_connections</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">conn_tuple</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                            <span class="n">connections_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">conn_tuple</span><span class="p">)</span>
+                            <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">conn_tuple</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">connections_list</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_port_id</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">port_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse port ID into (block_name, port_name)</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            port_id: Port ID (e.g., &quot;http://example.org#Model.block.port&quot; or &quot;Model#port&quot;)</span>
+<span class="sd">            model_name: Model name for identifying model-level ports (simple name)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple of (block_name or None, port_name)</span>
+<span class="sd">            None for block_name indicates model-level input/output</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Extract name part after #</span>
+        <span class="n">full_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_id_name</span><span class="p">(</span><span class="n">port_id</span><span class="p">)</span>
+
+        <span class="c1"># S231P format examples:</span>
+        <span class="c1"># - &quot;FromModelica.CustomPWithLimiter.e&quot; -&gt; model port &quot;e&quot;</span>
+        <span class="c1"># - &quot;FromModelica.CustomPWithLimiter.gain.u&quot; -&gt; block &quot;gain&quot; port &quot;u&quot;</span>
+
+        <span class="n">parts</span> <span class="o">=</span> <span class="n">full_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+        <span class="n">port_name</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># Just &quot;portName&quot; - model port</span>
+            <span class="k">return</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">port_name</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="c1"># &quot;instance.portName&quot; or &quot;ModelName.portName&quot;</span>
+            <span class="c1"># Assume instance.portName (old format)</span>
+            <span class="c1"># Unless second-to-last is the model name</span>
+            <span class="k">if</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">model_name</span><span class="p">:</span>
+                <span class="c1"># ModelName.portName - model port</span>
+                <span class="k">return</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">port_name</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># instance.portName - block port</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">port_name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># 3+ parts: &quot;Package.ModelName.portName&quot; or &quot;Package.ModelName.instance.portName&quot;</span>
+            <span class="c1"># Check if second-to-last part is the model name</span>
+            <span class="n">potential_instance</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">potential_instance</span> <span class="o">==</span> <span class="n">model_name</span><span class="p">:</span>
+                <span class="c1"># This is a model-level port: &quot;Package.ModelName.portName&quot;</span>
+                <span class="k">return</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">port_name</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># This is a block port: &quot;Package.ModelName.BlockName.portName&quot;</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">potential_instance</span><span class="p">,</span> <span class="n">port_name</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Parameter</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse parameter from CXF data</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            param_data: Parameter dictionary</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Parameter object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Extract name from @id or label</span>
+        <span class="k">if</span> <span class="s1">&#39;@id&#39;</span> <span class="ow">in</span> <span class="n">param_data</span><span class="p">:</span>
+            <span class="n">full_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_id_name</span><span class="p">(</span><span class="n">param_data</span><span class="p">[</span><span class="s1">&#39;@id&#39;</span><span class="p">])</span>
+            <span class="c1"># Get last part after dot</span>
+            <span class="n">param_name</span> <span class="o">=</span> <span class="n">full_id</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">full_id</span> <span class="k">else</span> <span class="n">full_id</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">param_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">param_data</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;unnamed&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Get type from @type or isOfDataType</span>
+        <span class="n">param_type_raw</span> <span class="o">=</span> <span class="n">param_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;@type&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;Parameter&#39;</span> <span class="ow">in</span> <span class="n">param_type_raw</span><span class="p">:</span>
+            <span class="c1"># Check isOfDataType for actual type</span>
+            <span class="n">data_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">param_data</span><span class="p">,</span> <span class="s1">&#39;isOfDataType&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">data_type</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_type</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;@id&#39;</span> <span class="ow">in</span> <span class="n">data_type</span><span class="p">:</span>
+                    <span class="n">type_id</span> <span class="o">=</span> <span class="n">data_type</span><span class="p">[</span><span class="s1">&#39;@id&#39;</span><span class="p">]</span>
+                    <span class="n">param_type</span> <span class="o">=</span> <span class="n">type_id</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;:&#39;</span> <span class="ow">in</span> <span class="n">type_id</span> <span class="k">else</span> <span class="n">type_id</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">param_type</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">data_type</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">param_type</span> <span class="o">=</span> <span class="s1">&#39;Real&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">param_type</span> <span class="o">=</span> <span class="n">param_type_raw</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;:&#39;</span> <span class="ow">in</span> <span class="n">param_type_raw</span> <span class="k">else</span> <span class="n">param_type_raw</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">param_type</span><span class="p">:</span>
+                <span class="n">param_type</span> <span class="o">=</span> <span class="s1">&#39;Real&#39;</span>
+
+        <span class="c1"># Get value</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">param_data</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+
+        <span class="c1"># Get description</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">param_data</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Parameter</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">param_name</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="n">param_type</span><span class="p">,</span>
+            <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="n">description</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_port</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Port</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse port from CXF data</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            port_data: Port dictionary</span>
+<span class="sd">            model_name: Model name for extracting port name</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Port object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Extract name from @id or label</span>
+        <span class="k">if</span> <span class="s1">&#39;@id&#39;</span> <span class="ow">in</span> <span class="n">port_data</span><span class="p">:</span>
+            <span class="n">full_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_id_name</span><span class="p">(</span><span class="n">port_data</span><span class="p">[</span><span class="s1">&#39;@id&#39;</span><span class="p">])</span>
+            <span class="c1"># Get last part after dot (port name)</span>
+            <span class="n">port_name</span> <span class="o">=</span> <span class="n">full_id</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">full_id</span> <span class="k">else</span> <span class="n">full_id</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">port_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">port_data</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;unnamed&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Get type from @type (RealInput, IntegerOutput, etc.)</span>
+        <span class="n">type_str</span> <span class="o">=</span> <span class="n">port_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;@type&#39;</span><span class="p">,</span> <span class="s1">&#39;RealInput&#39;</span><span class="p">)</span>
+        <span class="c1"># Remove namespace prefix if present</span>
+        <span class="k">if</span> <span class="s1">&#39;:&#39;</span> <span class="ow">in</span> <span class="n">type_str</span><span class="p">:</span>
+            <span class="n">type_str</span> <span class="o">=</span> <span class="n">type_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Extract base type (Real, Integer, Boolean)</span>
+        <span class="k">if</span> <span class="s1">&#39;Real&#39;</span> <span class="ow">in</span> <span class="n">type_str</span><span class="p">:</span>
+            <span class="n">port_type</span> <span class="o">=</span> <span class="n">PortType</span><span class="o">.</span><span class="n">REAL</span>
+        <span class="k">elif</span> <span class="s1">&#39;Integer&#39;</span> <span class="ow">in</span> <span class="n">type_str</span><span class="p">:</span>
+            <span class="n">port_type</span> <span class="o">=</span> <span class="n">PortType</span><span class="o">.</span><span class="n">INTEGER</span>
+        <span class="k">elif</span> <span class="s1">&#39;Boolean&#39;</span> <span class="ow">in</span> <span class="n">type_str</span><span class="p">:</span>
+            <span class="n">port_type</span> <span class="o">=</span> <span class="n">PortType</span><span class="o">.</span><span class="n">BOOLEAN</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">port_type</span> <span class="o">=</span> <span class="n">PortType</span><span class="o">.</span><span class="n">REAL</span>  <span class="c1"># Default</span>
+
+        <span class="c1"># Get description</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_prop</span><span class="p">(</span><span class="n">port_data</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Port</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">port_name</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="n">port_type</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="n">description</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_cxf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cxf_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate CXF structure</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cxf_data: CXF dictionary</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if valid</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If validation fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check for @context (required for JSON-LD)</span>
+        <span class="k">if</span> <span class="s1">&#39;@context&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cxf_data</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;CXF missing required field: @context&quot;</span><span class="p">)</span>
+
+        <span class="c1"># CXF can have @graph or be a single object</span>
+        <span class="k">if</span> <span class="s1">&#39;@graph&#39;</span> <span class="ow">in</span> <span class="n">cxf_data</span><span class="p">:</span>
+            <span class="c1"># @graph format</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cxf_data</span><span class="p">[</span><span class="s1">&#39;@graph&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">cxf_data</span><span class="p">[</span><span class="s1">&#39;@graph&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;CXF @graph must be non-empty list&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Find a Block object in @graph</span>
+            <span class="n">has_block</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">cxf_data</span><span class="p">[</span><span class="s1">&#39;@graph&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="s1">&#39;@type&#39;</span> <span class="ow">in</span> <span class="n">obj</span> <span class="ow">and</span> <span class="s1">&#39;Block&#39;</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;@type&#39;</span><span class="p">]:</span>
+                    <span class="n">has_block</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="k">break</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">has_block</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;CXF @graph must contain at least one Block object&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Single object format</span>
+            <span class="k">if</span> <span class="s1">&#39;@type&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cxf_data</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;CXF root object missing @type&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, CDL Python Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
