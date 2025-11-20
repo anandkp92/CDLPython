@@ -98,3 +98,32 @@ class CDLBlock:
         for key, value in defaults.items():
             if key not in self._state:
                 self._state[key] = value
+
+    def get_state(self) -> Dict[str, Any]:
+        """
+        Get current state of the block.
+
+        Returns:
+            Dictionary containing the block's internal state.
+            This is a shallow copy to prevent external modifications.
+        """
+        return self._state.copy()
+
+    def set_state(self, state: Dict[str, Any]):
+        """
+        Set the block's internal state.
+
+        This method restores a previously saved state, allowing
+        simulation resumption from a checkpoint.
+
+        Args:
+            state: Dictionary containing the state to restore
+
+        Example:
+            >>> # Save state
+            >>> saved_state = block.get_state()
+            >>> # ... some computation ...
+            >>> # Restore state
+            >>> block.set_state(saved_state)
+        """
+        self._state = state.copy()

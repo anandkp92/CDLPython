@@ -72,9 +72,21 @@ class ZeroTime(Enum):
     NY2050 = "NY2050"
 
 
+class OperationModes(Enum):
+    """Enumeration defining ASHRAE G36 operation modes"""
+    occupied = 1              # Occupied mode
+    unoccupied = 2            # Unoccupied mode
+    coolDown = 3              # Cool-down mode
+    warmUp = 4                # Warm-up mode
+    setBack = 5               # Setback mode
+    setUp = 6                 # Setup mode
+    freezeProtection = 7      # Freeze protection mode
+
+
 __all__ = [
     "SimpleController",
     "Extrapolation",
     "Smoothness",
     "ZeroTime",
+    "OperationModes",
 ]

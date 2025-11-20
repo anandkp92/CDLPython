@@ -39,6 +39,38 @@ class CXFParser:
         """Initialize parser"""
         self.id_map = {}  # Map of @id to object for S231P format
 
+    def _map_enum_reference(self, value: str) -> str:
+        """Map Modelica enum reference to Python enum reference
+
+        Args:
+            value: Modelica enum reference like "Buildings.Controls.OBC.CDL.Types.SimpleController.PI"
+
+        Returns:
+            Python enum reference like "SimpleController.PI" or original value if not an enum
+        """
+        # Enum type mappings: Modelica path prefix -> Python enum class
+        enum_mappings = {
+            'Buildings.Controls.OBC.CDL.Types.SimpleController': 'SimpleController',
+            'Buildings.Controls.OBC.ASHRAE.G36.Types.OperationModes': 'OperationModes',
+            'Buildings.Controls.OBC.CDL.Types.Extrapolation': 'Extrapolation',
+            'Buildings.Controls.OBC.CDL.Types.Smoothness': 'Smoothness',
+            'Buildings.Controls.OBC.CDL.Types.ZeroTime': 'ZeroTime',
+        }
+
+        # Check if this looks like an enum reference (has multiple dots)
+        if not isinstance(value, str) or value.count('.') < 2:
+            return value
+
+        # Try to match enum type prefix
+        for modelica_prefix, python_enum in enum_mappings.items():
+            if value.startswith(modelica_prefix + '.'):
+                # Extract the enum value (last part)
+                enum_value = value[len(modelica_prefix) + 1:]
+                return f"{python_enum}.{enum_value}"
+
+        # Not a recognized enum, return as-is
+        return value
+
     def _get_prop(self, obj: Dict[str, Any], prop_name: str, default: Any = None) -> Any:
         """Get property with or without S231P namespace
 
@@ -339,10 +371,22 @@ class CXFParser:
                         value = param.value
                         if isinstance(value, str) and not value.replace('.', '').replace('-', '').replace('e', '').replace('+', '').replace('E', '').replace('_', '').isdigit():
                             # Looks like a reference, not a number
-                            # Check if it's a parent parameter reference
-                            if '.' not in value or value in self.id_map:
+                            # First try to map as enum reference
+                            mapped_value = self._map_enum_reference(value)
+                            if mapped_value != value:
+                                # Successfully mapped to enum
+                                value = mapped_value
+                            elif '.' not in value or value in self.id_map:
                                 # Simple name - reference to parent parameter
-                                value = f"self.{value}"
+                                # Handle negation or other unary operators
+                                if value.startswith('-'):
+                                    # Negated parameter: -paramName -> -self.paramName
+                                    value = f"-self.{value[1:]}"
+                                elif value.startswith('+'):
+                                    # Positive parameter: +paramName -> +self.paramName (rare but handle it)
+                                    value = f"+self.{value[1:]}"
+                                else:
+                                    value = f"self.{value}"
                         parameters[param.name] = value
 
             instance = BlockInstance(
@@ -608,6 +652,10 @@ class CXFParser:
 
         # Get value
         value = self._get_prop(param_data, 'value', 0.0)
+
+        # Map enum references if the value is a string
+        if isinstance(value, str):
+            value = self._map_enum_reference(value)
 
         # Get description
         description = self._get_prop(param_data, 'description', '')

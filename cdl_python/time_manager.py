@@ -132,3 +132,51 @@ class TimeManager:
                 self._current_time = start_time
             elif mode == ExecutionMode.REALTIME:
                 self._current_time = time.time()
+
+    def get_state(self) -> dict:
+        """
+        Get current state of TimeManager for checkpointing.
+
+        Returns:
+            Dictionary containing time manager state including:
+            - mode: Execution mode (SIMULATION or REALTIME)
+            - current_time: Current time value
+            - time_step: Default timestep (if set)
+
+        Example:
+            >>> tm = TimeManager(mode=ExecutionMode.SIMULATION, time_step=0.1)
+            >>> tm.advance()
+            >>> state = tm.get_state()
+            >>> # state = {'mode': 'simulation', 'current_time': 0.1, 'time_step': 0.1}
+        """
+        with self._lock:
+            return {
+                'mode': self.mode.value,
+                'current_time': self._current_time,
+                'time_step': self.time_step
+            }
+
+    def set_state(self, state: dict):
+        """
+        Restore TimeManager state from checkpoint.
+
+        Args:
+            state: Dictionary containing state to restore (from get_state())
+
+        Raises:
+            ValueError: If state dictionary is invalid
+
+        Example:
+            >>> # Save state
+            >>> saved_state = tm.get_state()
+            >>> # ... some operations ...
+            >>> # Restore state
+            >>> tm.set_state(saved_state)
+        """
+        with self._lock:
+            if 'mode' in state:
+                self.mode = ExecutionMode(state['mode'])
+            if 'current_time' in state:
+                self._current_time = state['current_time']
+            if 'time_step' in state:
+                self.time_step = state['time_step']

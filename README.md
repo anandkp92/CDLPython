@@ -345,6 +345,202 @@ while True:
     time.sleep(0.1)
 ```
 
+### State Management and Execution Model
+
+CDL Python implements a simplified execution model compared to other actor-oriented frameworks like Ptolemy. Understanding this model is crucial for building reliable control systems.
+
+#### Execution Model Comparison
+
+**Ptolemy's Multi-Phase Model:**
+- **`prefire()`**: Check if actor is ready to fire (returns boolean)
+- **`fire()`**: Perform computation WITHOUT modifying persistent state (can be called multiple times for fixed-point iterations)
+- **`postfire()`**: Update persistent state after all `fire()` calls complete
+
+**CDL Python's Simplified Model:**
+- **Single-phase execution**: The `compute()` method combines both computation and state update
+- **Immediate state updates**: States are modified during `compute()` call
+- **No fixed-point iterations**: Each `compute()` call processes inputs and updates states atomically
+
+**Why the difference?**
+CDL focuses on real-time building control with deterministic data flow. Unlike Ptolemy's support for complex Models of Computation (fixed-point, synchronous reactive, etc.), CDL sequences have:
+- Acyclic data flow (no algebraic loops)
+- Single evaluation per timestep
+- Predictable execution order (topological sort)
+
+This allows CDL Python to use a simpler, more efficient single-phase execution model suitable for real-time control.
+
+#### How States Work
+
+**State Variables:**
+Stateful blocks (integrators, PIDs, timers, delays) maintain internal state in a `_state` dictionary:
+
+```python
+class IntegratorWithReset(CDLBlock):
+    def __init__(self, time_manager, k=1.0, y_start=0.0):
+        super().__init__(time_manager)
+        self.k = k
+        self.y_start = y_start
+
+        # Internal state
+        self._state = {
+            'y': y_start,           # Integrated value
+            'last_time': None,      # Last computation time
+            'last_trigger': False   # Previous trigger state
+        }
+```
+
+**State Update Timing:**
+States are updated during the `compute()` method using Euler discretization:
+
+```python
+def compute(self, u, trigger, y_reset_in):
+    current_time = self.get_time()
+    dt = current_time - self._state['last_time']
+
+    # Euler integration: y[n+1] = y[n] + k * u * dt
+    self._state['y'] += self.k * u * dt
+
+    # Update time for next iteration
+    self._state['last_time'] = current_time
+
+    return {'y': self._state['y']}
+```
+
+**TimeManager Integration:**
+- **Simulation mode**: Manual time advancement with `tm.advance(dt)`
+- **Real-time mode**: Automatic wall-clock time tracking
+- Blocks query time via `self.get_time()` to compute timesteps
+- All stateful blocks share the same `TimeManager` instance
+
+#### State Checkpointing and Recovery
+
+CDL Python provides checkpoint/restore functionality for fault recovery and simulation resumption:
+
+```python
+from cdl_python.checkpoint import CheckpointManager, AutoCheckpointer
+from cdl_python.time_manager import TimeManager, ExecutionMode
+
+# Create checkpoint manager
+checkpoint_mgr = CheckpointManager(checkpoint_dir='./checkpoints')
+
+# Setup your control system
+tm = TimeManager(mode=ExecutionMode.SIMULATION, time_step=0.1)
+controller = MyController(time_manager=tm, k=1.0)
+
+# Run simulation
+for step in range(100):
+    outputs = controller.compute(u=inputs[step])
+    tm.advance()
+
+    # Save checkpoint at key moments
+    if step == 50:
+        checkpoint_file = checkpoint_mgr.save_checkpoint(
+            model=controller,
+            time_manager=tm,
+            metadata={'description': 'Halfway point', 'step': step}
+        )
+        print(f"Checkpoint saved: {checkpoint_file}")
+
+# Later, restore from checkpoint
+checkpoint_mgr.restore_checkpoint(
+    model=controller,
+    time_manager=tm,
+    checkpoint_file='checkpoint_20250120_150430.json'
+)
+```
+
+**What Gets Saved:**
+- All block states (`_state` dictionaries)
+- TimeManager state (current time, mode, timestep)
+- Custom metadata (step numbers, physical values, etc.)
+
+**Automatic Checkpointing:**
+For long-running simulations or real-time control:
+
+```python
+# Setup automatic checkpointing
+auto_cp = AutoCheckpointer(
+    checkpoint_mgr=checkpoint_mgr,
+    interval_steps=100  # Checkpoint every 100 steps
+)
+
+for step in range(10000):
+    outputs = controller.compute(u=inputs[step])
+    tm.advance()
+
+    # Automatically checkpoint if interval reached
+    auto_cp.maybe_checkpoint(
+        model=controller,
+        time_manager=tm,
+        step=step,
+        metadata={'step': step, 'temp': outputs['y']}
+    )
+```
+
+**Use Cases:**
+1. **Simulation resumption**: Save state at end of day, resume next day
+2. **Fault recovery**: Restore last known good state after system crash
+3. **What-if analysis**: Checkpoint before testing control changes
+4. **Debugging**: Save states to replay problematic scenarios
+
+**Format Options:**
+- **JSON** (default): Human-readable, portable across systems
+- **Pickle**: Binary format, faster for large states
+
+**Example: Recovery from Crash:**
+```python
+import signal
+import sys
+
+# Setup checkpoint manager
+checkpoint_mgr = CheckpointManager('./checkpoints')
+auto_cp = AutoCheckpointer(checkpoint_mgr, interval_steps=10)
+
+def signal_handler(sig, frame):
+    """Save state on Ctrl+C or system signal"""
+    print("Saving emergency checkpoint...")
+    checkpoint_mgr.save_checkpoint(
+        model=controller,
+        time_manager=tm,
+        checkpoint_name='emergency_checkpoint'
+    )
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, signal_handler)
+
+# On restart, restore last checkpoint:
+try:
+    checkpoints = checkpoint_mgr.list_checkpoints()
+    if checkpoints:
+        latest = checkpoints[-1]
+        checkpoint_mgr.restore_checkpoint(
+            model=controller,
+            time_manager=tm,
+            checkpoint_file=latest
+        )
+        print(f"Restored from: {latest}")
+except FileNotFoundError:
+    print("No checkpoint found, starting fresh")
+```
+
+**Performance Considerations:**
+- Checkpoint frequency vs overhead tradeoff
+- Use `cleanup_old_checkpoints(keep_count=10)` to manage disk space
+- Consider time-based intervals for real-time mode
+- JSON is slower but more portable than pickle
+
+**Testing Checkpoint Functionality:**
+```bash
+# Run checkpoint tests
+python tests/test_checkpoint.py
+```
+
+This will verify:
+- Basic save/restore of block states
+- TimeManager state persistence
+- Automatic checkpointing intervals
+- State consistency after restoration
+
 ### Complete Example: Custom P Controller with Limiter
 
 This example shows how to compose multiple CDL blocks to create custom control logic, translating a CDL model to Python. Based on [CustomPWithLimiter.mo](https://github.com/lbl-srg/modelica-json/blob/master/test/FromModelica/CustomPWithLimiter.mo).

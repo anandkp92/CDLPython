@@ -34,6 +34,7 @@ from cdl_python.CDL.Reals.MultiSum import MultiSum
 from cdl_python.CDL.Reals.Multiply import Multiply
 from cdl_python.CDL.Reals.MultiplyByParameter import MultiplyByParameter
 from cdl_python.CDL.Reals.PID import PID
+from cdl_python.CDL.Reals.PIDWithReset import PIDWithReset
 from cdl_python.CDL.Reals.Round import Round
 from cdl_python.CDL.Reals.Sin import Sin
 from cdl_python.CDL.Reals.Sort import Sort
@@ -79,6 +80,7 @@ __all__ = [
     "Multiply",
     "MultiplyByParameter",
     "PID",
+    "PIDWithReset",
     "Round",
     "Sin",
     "Sort",

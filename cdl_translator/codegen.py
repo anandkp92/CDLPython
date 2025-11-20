@@ -107,10 +107,17 @@ class CodeGenerator:
 
             # Build compute call arguments
             args = []
+            used_params = set()  # Track parameter names to avoid duplicates
+
             for conn in input_connections:
                 if conn.is_from_input():
                     # Connection from model input
-                    args.append(f"{conn.target_port}={conn.source_port}")
+                    param_name = conn.target_port
+                    # Skip if we've already used this parameter
+                    if param_name in used_params:
+                        continue
+                    used_params.add(param_name)
+                    args.append(f"{param_name}={conn.source_port}")
                 else:
                     # Connection from another block's output
                     source_var = f"{conn.source_block}_output"
@@ -120,7 +127,12 @@ class CodeGenerator:
                         lines.append(f"{indent}{source_var} = self.{conn.source_block}.compute()")
                         computed_outputs[source_var] = True
 
-                    args.append(f"{conn.target_port}={source_var}['{conn.source_port}']")
+                    param_name = conn.target_port
+                    # Skip if we've already used this parameter
+                    if param_name in used_params:
+                        continue
+                    used_params.add(param_name)
+                    args.append(f"{param_name}={source_var}['{conn.source_port}']")
 
             # Generate compute call
             output_var = f"{instance.instance_name}_output"

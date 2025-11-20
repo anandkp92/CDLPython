@@ -249,7 +249,48 @@ class CDLModel:
 
             imports[module_path].add(class_name)
 
+        # Add enum type imports
+        enum_imports = self._get_enum_imports()
+        if enum_imports:
+            imports["cdl_python.CDL.Types"] = enum_imports
+
         return imports
+
+    def _get_enum_imports(self) -> Set[str]:
+        """Scan model and block parameters for enum references
+
+        Returns:
+            Set of enum type names that need to be imported
+        """
+        enum_types = set()
+
+        # Known enum types with their prefixes
+        enum_type_names = {
+            'SimpleController',
+            'OperationModes',
+            'Extrapolation',
+            'Smoothness',
+            'ZeroTime',
+        }
+
+        # Check model-level parameters
+        for param in self.metadata.parameters:
+            if isinstance(param.value, str):
+                # Check if value starts with any enum type name
+                for enum_type in enum_type_names:
+                    if param.value.startswith(enum_type + '.'):
+                        enum_types.add(enum_type)
+
+        # Check block instance parameters
+        for instance in self.instances:
+            for param_value in instance.parameters.values():
+                if isinstance(param_value, str):
+                    # Check if value starts with any enum type name
+                    for enum_type in enum_type_names:
+                        if param_value.startswith(enum_type + '.'):
+                            enum_types.add(enum_type)
+
+        return enum_types
 
     def needs_time_manager(self) -> bool:
         """Check if any block in the model needs TimeManager"""
@@ -329,19 +370,25 @@ class CDLModel:
         for conn in self.connections:
             # Check source
             if not conn.is_from_input():
+                # Connection from instance block
                 if conn.source_block not in instance_names:
                     errors.append(f"Connection references unknown source block: {conn.source_block}")
             else:
-                if conn.source_port not in input_names:
-                    errors.append(f"Connection references unknown input: {conn.source_port}")
+                # Connection from model-level port (could be input or output)
+                # Check if it's a valid model-level port (either input or output)
+                if conn.source_port not in input_names and conn.source_port not in output_names:
+                    errors.append(f"Connection references unknown model port: {conn.source_port}")
 
             # Check target
             if not conn.is_to_output():
+                # Connection to instance block
                 if conn.target_block not in instance_names:
                     errors.append(f"Connection references unknown target block: {conn.target_block}")
             else:
-                if conn.target_port not in output_names:
-                    errors.append(f"Connection references unknown output: {conn.target_port}")
+                # Connection to model-level port (could be input or output)
+                # Check if it's a valid model-level port (either input or output)
+                if conn.target_port not in input_names and conn.target_port not in output_names:
+                    errors.append(f"Connection references unknown model port: {conn.target_port}")
 
         # Check for circular dependencies
         try:
